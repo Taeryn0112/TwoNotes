@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
+		E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */; };
+		E97FC3F625775CD0002CBC08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F525775CD0002CBC08 /* ViewController.swift */; };
+		E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3F725775CD0002CBC08 /* Main.storyboard */; };
+		E97FC3FB25775CD1002CBC08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3FA25775CD1002CBC08 /* Assets.xcassets */; };
+		E97FC3FE25775CD1002CBC08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3FC25775CD1002CBC08 /* LaunchScreen.storyboard */; };
+		E97FC40925775CD1002CBC08 /* TwoNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC40825775CD1002CBC08 /* TwoNotesTests.swift */; };
+		E97FC41425775CD1002CBC08 /* TwoNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC41325775CD1002CBC08 /* TwoNotesUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E97FC40525775CD1002CBC08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97FC3E625775CCF002CBC08 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E97FC3ED25775CD0002CBC08;
+			remoteInfo = TwoNotes;
+		};
+		E97FC41025775CD1002CBC08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97FC3E625775CCF002CBC08 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E97FC3ED25775CD0002CBC08;
+			remoteInfo = TwoNotes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97FC3F125775CD0002CBC08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E97FC3F525775CD0002CBC08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E97FC3F825775CD0002CBC08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E97FC3FA25775CD1002CBC08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E97FC3FD25775CD1002CBC08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E97FC3FF25775CD1002CBC08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E97FC40425775CD1002CBC08 /* TwoNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwoNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97FC40825775CD1002CBC08 /* TwoNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoNotesTests.swift; sourceTree = "<group>"; };
+		E97FC40A25775CD1002CBC08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E97FC40F25775CD1002CBC08 /* TwoNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwoNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97FC41325775CD1002CBC08 /* TwoNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoNotesUITests.swift; sourceTree = "<group>"; };
+		E97FC41525775CD1002CBC08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E97FC3EB25775CD0002CBC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40125775CD1002CBC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40C25775CD1002CBC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E97FC3E525775CCF002CBC08 = {
+			isa = PBXGroup;
+			children = (
+				E97FC3F025775CD0002CBC08 /* TwoNotes */,
+				E97FC40725775CD1002CBC08 /* TwoNotesTests */,
+				E97FC41225775CD1002CBC08 /* TwoNotesUITests */,
+				E97FC3EF25775CD0002CBC08 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E97FC3EF25775CD0002CBC08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E97FC3EE25775CD0002CBC08 /* TwoNotes.app */,
+				E97FC40425775CD1002CBC08 /* TwoNotesTests.xctest */,
+				E97FC40F25775CD1002CBC08 /* TwoNotesUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E97FC3F025775CD0002CBC08 /* TwoNotes */ = {
+			isa = PBXGroup;
+			children = (
+				E97FC3F125775CD0002CBC08 /* AppDelegate.swift */,
+				E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */,
+				E97FC3F525775CD0002CBC08 /* ViewController.swift */,
+				E97FC3F725775CD0002CBC08 /* Main.storyboard */,
+				E97FC3FA25775CD1002CBC08 /* Assets.xcassets */,
+				E97FC3FC25775CD1002CBC08 /* LaunchScreen.storyboard */,
+				E97FC3FF25775CD1002CBC08 /* Info.plist */,
+			);
+			path = TwoNotes;
+			sourceTree = "<group>";
+		};
+		E97FC40725775CD1002CBC08 /* TwoNotesTests */ = {
+			isa = PBXGroup;
+			children = (
+				E97FC40825775CD1002CBC08 /* TwoNotesTests.swift */,
+				E97FC40A25775CD1002CBC08 /* Info.plist */,
+			);
+			path = TwoNotesTests;
+			sourceTree = "<group>";
+		};
+		E97FC41225775CD1002CBC08 /* TwoNotesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E97FC41325775CD1002CBC08 /* TwoNotesUITests.swift */,
+				E97FC41525775CD1002CBC08 /* Info.plist */,
+			);
+			path = TwoNotesUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E97FC3ED25775CD0002CBC08 /* TwoNotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E97FC41825775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotes" */;
+			buildPhases = (
+				E97FC3EA25775CD0002CBC08 /* Sources */,
+				E97FC3EB25775CD0002CBC08 /* Frameworks */,
+				E97FC3EC25775CD0002CBC08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwoNotes;
+			productName = TwoNotes;
+			productReference = E97FC3EE25775CD0002CBC08 /* TwoNotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E97FC40325775CD1002CBC08 /* TwoNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E97FC41B25775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotesTests" */;
+			buildPhases = (
+				E97FC40025775CD1002CBC08 /* Sources */,
+				E97FC40125775CD1002CBC08 /* Frameworks */,
+				E97FC40225775CD1002CBC08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E97FC40625775CD1002CBC08 /* PBXTargetDependency */,
+			);
+			name = TwoNotesTests;
+			productName = TwoNotesTests;
+			productReference = E97FC40425775CD1002CBC08 /* TwoNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E97FC40E25775CD1002CBC08 /* TwoNotesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E97FC41E25775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotesUITests" */;
+			buildPhases = (
+				E97FC40B25775CD1002CBC08 /* Sources */,
+				E97FC40C25775CD1002CBC08 /* Frameworks */,
+				E97FC40D25775CD1002CBC08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E97FC41125775CD1002CBC08 /* PBXTargetDependency */,
+			);
+			name = TwoNotesUITests;
+			productName = TwoNotesUITests;
+			productReference = E97FC40F25775CD1002CBC08 /* TwoNotesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E97FC3E625775CCF002CBC08 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					E97FC3ED25775CD0002CBC08 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					E97FC40325775CD1002CBC08 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = E97FC3ED25775CD0002CBC08;
+					};
+					E97FC40E25775CD1002CBC08 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = E97FC3ED25775CD0002CBC08;
+					};
+				};
+			};
+			buildConfigurationList = E97FC3E925775CCF002CBC08 /* Build configuration list for PBXProject "TwoNotes" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E97FC3E525775CCF002CBC08;
+			productRefGroup = E97FC3EF25775CD0002CBC08 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E97FC3ED25775CD0002CBC08 /* TwoNotes */,
+				E97FC40325775CD1002CBC08 /* TwoNotesTests */,
+				E97FC40E25775CD1002CBC08 /* TwoNotesUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E97FC3EC25775CD0002CBC08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E97FC3FE25775CD1002CBC08 /* LaunchScreen.storyboard in Resources */,
+				E97FC3FB25775CD1002CBC08 /* Assets.xcassets in Resources */,
+				E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40225775CD1002CBC08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40D25775CD1002CBC08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E97FC3EA25775CD0002CBC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E97FC3F625775CD0002CBC08 /* ViewController.swift in Sources */,
+				E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */,
+				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40025775CD1002CBC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E97FC40925775CD1002CBC08 /* TwoNotesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E97FC40B25775CD1002CBC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E97FC41425775CD1002CBC08 /* TwoNotesUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E97FC40625775CD1002CBC08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E97FC3ED25775CD0002CBC08 /* TwoNotes */;
+			targetProxy = E97FC40525775CD1002CBC08 /* PBXContainerItemProxy */;
+		};
+		E97FC41125775CD1002CBC08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E97FC3ED25775CD0002CBC08 /* TwoNotes */;
+			targetProxy = E97FC41025775CD1002CBC08 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E97FC3F725775CD0002CBC08 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E97FC3F825775CD0002CBC08 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E97FC3FC25775CD1002CBC08 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E97FC3FD25775CD1002CBC08 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E97FC41625775CD1002CBC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E97FC41725775CD1002CBC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E97FC41925775CD1002CBC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E97FC41A25775CD1002CBC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E97FC41C25775CD1002CBC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TwoNotes.app/TwoNotes";
+			};
+			name = Debug;
+		};
+		E97FC41D25775CD1002CBC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TwoNotes.app/TwoNotes";
+			};
+			name = Release;
+		};
+		E97FC41F25775CD1002CBC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TwoNotes;
+			};
+			name = Debug;
+		};
+		E97FC42025775CD1002CBC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4C2237E45;
+				INFOPLIST_FILE = TwoNotesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = TerryLee.TwoNotesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TwoNotes;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E97FC3E925775CCF002CBC08 /* Build configuration list for PBXProject "TwoNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E97FC41625775CD1002CBC08 /* Debug */,
+				E97FC41725775CD1002CBC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E97FC41825775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E97FC41925775CD1002CBC08 /* Debug */,
+				E97FC41A25775CD1002CBC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E97FC41B25775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E97FC41C25775CD1002CBC08 /* Debug */,
+				E97FC41D25775CD1002CBC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E97FC41E25775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E97FC41F25775CD1002CBC08 /* Debug */,
+				E97FC42025775CD1002CBC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E97FC3E625775CCF002CBC08 /* Project object */;
+}
