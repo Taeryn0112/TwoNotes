@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
 		E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */; };
-		E97FC3F625775CD0002CBC08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F525775CD0002CBC08 /* ViewController.swift */; };
 		E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3F725775CD0002CBC08 /* Main.storyboard */; };
 		E97FC3FB25775CD1002CBC08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3FA25775CD1002CBC08 /* Assets.xcassets */; };
 		E97FC3FE25775CD1002CBC08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3FC25775CD1002CBC08 /* LaunchScreen.storyboard */; };
 		E97FC40925775CD1002CBC08 /* TwoNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC40825775CD1002CBC08 /* TwoNotesTests.swift */; };
 		E97FC41425775CD1002CBC08 /* TwoNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC41325775CD1002CBC08 /* TwoNotesUITests.swift */; };
+		E9903009257860A500EB09AC /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9903008257860A500EB09AC /* NotesTableViewController.swift */; };
+		E99030142578664900EB09AC /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030132578664900EB09AC /* Note.swift */; };
+		E99030192578774C00EB09AC /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030182578774C00EB09AC /* NotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97FC3F125775CD0002CBC08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E97FC3F525775CD0002CBC08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E97FC3F825775CD0002CBC08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E97FC3FA25775CD1002CBC08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E97FC3FD25775CD1002CBC08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		E97FC40F25775CD1002CBC08 /* TwoNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwoNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97FC41325775CD1002CBC08 /* TwoNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoNotesUITests.swift; sourceTree = "<group>"; };
 		E97FC41525775CD1002CBC08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9903008257860A500EB09AC /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		E99030132578664900EB09AC /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		E99030182578774C00EB09AC /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +105,9 @@
 			children = (
 				E97FC3F125775CD0002CBC08 /* AppDelegate.swift */,
 				E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */,
-				E97FC3F525775CD0002CBC08 /* ViewController.swift */,
-				E97FC3F725775CD0002CBC08 /* Main.storyboard */,
+				E990300D257860BA00EB09AC /* Model */,
+				E990300F257860EF00EB09AC /* Controller */,
+				E990300E257860D100EB09AC /* View */,
 				E97FC3FA25775CD1002CBC08 /* Assets.xcassets */,
 				E97FC3FC25775CD1002CBC08 /* LaunchScreen.storyboard */,
 				E97FC3FF25775CD1002CBC08 /* Info.plist */,
@@ -126,6 +131,31 @@
 				E97FC41525775CD1002CBC08 /* Info.plist */,
 			);
 			path = TwoNotesUITests;
+			sourceTree = "<group>";
+		};
+		E990300D257860BA00EB09AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E99030132578664900EB09AC /* Note.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E990300E257860D100EB09AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E97FC3F725775CD0002CBC08 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E990300F257860EF00EB09AC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E9903008257860A500EB09AC /* NotesTableViewController.swift */,
+				E99030182578774C00EB09AC /* NotesViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E97FC3F625775CD0002CBC08 /* ViewController.swift in Sources */,
 				E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */,
+				E99030192578774C00EB09AC /* NotesViewController.swift in Sources */,
 				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
+				E9903009257860A500EB09AC /* NotesTableViewController.swift in Sources */,
+				E99030142578664900EB09AC /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
