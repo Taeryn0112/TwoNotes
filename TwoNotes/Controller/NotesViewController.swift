@@ -7,7 +7,18 @@
 
 import UIKit
 
-public class NotesViewController: UIViewController {
+public class NotesViewController: UITextView {
+    
+    
+    var userText = UITextView()
+    
+    func textInput() -> String {
+        
+        guard let text = userText.text else {
+            return "No text"
+        }
+        return text
+    }
     
     
 }
