@@ -19,13 +19,27 @@ class NoteStore {
         
         return newNote
         
-        
     }
     
-    init() {
-        for _ in 0..<5 {
-            storeNote()
+    func removeNote(_ note: Note) {
+        if let index = allNote.firstIndex(of: note) {
+            allNote.remove(at: index)
         }
+    }
+    
+    func moveItem(from fromIndex: Int, to toIndex: Int) {
+        if fromIndex == toIndex {
+            return
+        }
+        
+        let originalNote = allNote[fromIndex]
+        
+        allNote.remove(at: fromIndex)
+        
+        allNote.insert(originalNote, at: toIndex)
+        
+        
+        
     }
     
     
