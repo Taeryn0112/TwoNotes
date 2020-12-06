@@ -31,7 +31,7 @@
                                     <rect key="frame" x="331" y="11" width="75" height="22"/>
                                     <state key="normal" image="plus" catalog="system"/>
                                     <connections>
-                                        <action selector="addNewNote:" destination="P7m-wh-ko4" eventType="touchUpInside" id="prW-Ih-4mk"/>
+                                        <segue destination="Cno-fO-Gox" kind="show" identifier="addNewNote" id="xkp-CC-5tf"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -46,11 +46,11 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" textLabel="f1B-a6-uSI" detailTextLabel="sdK-aF-YT2" style="IBUITableViewCellStyleValue1" id="cJr-hZ-UsS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoteCell" textLabel="f1B-a6-uSI" detailTextLabel="sdK-aF-YT2" style="IBUITableViewCellStyleValue1" id="cJr-hZ-UsS" customClass="NoteCell" customModule="TwoNotes" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cJr-hZ-UsS" id="ZGv-rr-YDf">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f1B-a6-uSI">
@@ -61,7 +61,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sdK-aF-YT2">
-                                            <rect key="frame" x="350.33333333333331" y="11.999999999999998" width="43.666666666666664" height="20.333333333333332"/>
+                                            <rect key="frame" x="331" y="11.999999999999998" width="43.666666666666664" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -69,6 +69,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userInputLabel" destination="f1B-a6-uSI" id="N5Y-Bw-Vzk"/>
+                                    <segue destination="Cno-fO-Gox" kind="show" identifier="showNote" id="joB-zl-vCa"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -76,50 +80,66 @@
                             <outlet property="delegate" destination="P7m-wh-ko4" id="SzR-0b-fiE"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="nEm-Zg-uPv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7K7-fq-Nov" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-444.92753623188412" y="10.597826086956523"/>
+            <point key="canvasLocation" x="532" y="6"/>
         </scene>
         <!--Notes View Controller-->
-        <scene sceneID="s1l-PM-dLX">
+        <scene sceneID="89N-RN-10O">
             <objects>
-                <viewController id="oxh-56-KPi" customClass="NotesViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5L0-Pd-EfI">
+                <viewController modalPresentationStyle="fullScreen" id="Cno-fO-Gox" customClass="NotesViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EZz-Dy-5KH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-zS-C5I" customClass="NotesViewController" customModule="TwoNotes" customModuleProvider="target">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-i9-o3F">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igD-uN-9lM">
+                                <rect key="frame" x="371" y="0.0" width="35" height="30"/>
+                                <state key="normal" title="done"/>
+                                <connections>
+                                    <action selector="done:" destination="Cno-fO-Gox" eventType="touchUpInside" id="HLv-Gg-kE8"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="bqH-ym-ORY"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <viewLayoutGuide key="safeArea" id="4qt-lq-fN1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bqH-ym-ORY" firstAttribute="bottom" secondItem="0bp-zS-C5I" secondAttribute="bottom" id="JRB-zV-SWq"/>
-                            <constraint firstItem="bqH-ym-ORY" firstAttribute="trailing" secondItem="0bp-zS-C5I" secondAttribute="trailing" id="fC9-Sm-bVw"/>
-                            <constraint firstItem="0bp-zS-C5I" firstAttribute="top" secondItem="bqH-ym-ORY" secondAttribute="top" id="m62-AM-DKT"/>
-                            <constraint firstItem="0bp-zS-C5I" firstAttribute="leading" secondItem="bqH-ym-ORY" secondAttribute="leading" id="xCk-hn-24s"/>
+                            <constraint firstItem="igD-uN-9lM" firstAttribute="trailing" secondItem="wmk-i9-o3F" secondAttribute="trailing" constant="-8" id="GKR-CI-abT"/>
+                            <constraint firstItem="wmk-i9-o3F" firstAttribute="top" secondItem="4qt-lq-fN1" secondAttribute="top" id="Kgi-sz-8zQ"/>
+                            <constraint firstItem="wmk-i9-o3F" firstAttribute="bottom" secondItem="4qt-lq-fN1" secondAttribute="bottom" id="P6C-q4-jxk"/>
+                            <constraint firstItem="wmk-i9-o3F" firstAttribute="trailing" secondItem="4qt-lq-fN1" secondAttribute="trailing" id="Xem-Ce-NYN"/>
+                            <constraint firstItem="wmk-i9-o3F" firstAttribute="top" secondItem="igD-uN-9lM" secondAttribute="bottom" constant="-30" id="pgj-jK-U5t"/>
+                            <constraint firstItem="wmk-i9-o3F" firstAttribute="leading" secondItem="4qt-lq-fN1" secondAttribute="leading" id="xre-4z-8JY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xx5-Pm-IcL"/>
+                    <navigationItem key="navigationItem" id="mCx-Fu-I2p"/>
+                    <connections>
+                        <outlet property="noteTextView" destination="wmk-i9-o3F" id="ybx-Kl-k5w"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Eab-pk-qcq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="310" y="11"/>
+            <point key="canvasLocation" x="1523" y="6"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="joB-zl-vCa"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

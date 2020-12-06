@@ -7,18 +7,14 @@
 
 import UIKit
 
-public class NotesViewController: UITextView {
+public class NotesViewController: UIViewController {
+    @IBOutlet weak var noteTextView: UITextView!
     
-    
-    var userText = UITextView()
-    
-    func textInput() -> String {
+        var note: Note!
         
-        guard let text = userText.text else {
-            return "No text"
-        }
-        return text
+    @IBAction func done(_ sender: Any) {
+        note.userInput = noteTextView.text
+        dismiss(animated: true, completion: nil)
     }
-    
     
 }

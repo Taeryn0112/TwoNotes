@@ -10,14 +10,11 @@ import UIKit
 class NoteStore {
     
     var allNote = [Note]()
+   
     
-    @discardableResult func storeNote() -> Note {
+    func storeNote(_ note: Note) {
         
-        let newNote = Note(random: true)
-        
-        allNote.append(newNote)
-        
-        return newNote
+        allNote.append(note)
         
     }
     

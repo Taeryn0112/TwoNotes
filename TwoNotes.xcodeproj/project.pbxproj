@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E95129132579A22D00E6552C /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95129122579A22D00E6552C /* NoteStore.swift */; };
+		E954B5DC257C749200221416 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954B5DB257C749200221416 /* NoteCell.swift */; };
 		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
 		E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */; };
 		E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3F725775CD0002CBC08 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		E95129122579A22D00E6552C /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
+		E954B5DB257C749200221416 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97FC3F125775CD0002CBC08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				E9903008257860A500EB09AC /* NotesTableViewController.swift */,
 				E99030182578774C00EB09AC /* NotesViewController.swift */,
+				E954B5DB257C749200221416 /* NoteCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
 				E95129132579A22D00E6552C /* NoteStore.swift in Sources */,
 				E9903009257860A500EB09AC /* NotesTableViewController.swift in Sources */,
+				E954B5DC257C749200221416 /* NoteCell.swift in Sources */,
 				E99030142578664900EB09AC /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
