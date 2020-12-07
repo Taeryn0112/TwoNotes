@@ -17,4 +17,10 @@ public class NotesViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
+        print("Unwind to root view controller")
+    }
+    
+    
+    
 }

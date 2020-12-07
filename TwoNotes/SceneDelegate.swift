@@ -20,7 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let noteStore = NoteStore()
         
-        let notesController = window!.rootViewController as! NotesTableViewController
+        
+        let navController = window!.rootViewController as! UINavigationController
+        //make the noteStore
+        let notesController = navController.topViewController as! NotesTableViewController
         notesController.noteStore = noteStore
     }
 

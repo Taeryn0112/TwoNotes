@@ -86,15 +86,11 @@ public class NotesTableViewController: UITableViewController {
         switch segue.identifier {
         case "showNote"?:
             if let row = tableView.indexPathForSelectedRow?.row {
-        
-        let note = noteStore.allNote[row]
-        let notesViewController = segue.destination as! NotesViewController
-                notesViewController
-            notesViewController.note = note
+                let note = noteStore.allNote[row]
+                let notesViewController = segue.destination as! NotesViewController
+                notesViewController.note = note
             }
-        
         case "addNewNote"?:
-            
             let newNote = Note(userInput: "")
             noteStore.storeNote(newNote)
             if let index = noteStore.allNote.firstIndex(of: newNote) {
@@ -103,7 +99,7 @@ public class NotesTableViewController: UITableViewController {
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
             let notesViewController = segue.destination as! NotesViewController
-                    notesViewController
+                  
             notesViewController.note = newNote
             
         default: preconditionFailure("Unexpected segue identifier")
