@@ -101,33 +101,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igD-uN-9lM">
-                                <rect key="frame" x="371" y="44" width="35" height="30"/>
-                                <state key="normal" title="done"/>
-                                <connections>
-                                    <action selector="done:" destination="Cno-fO-Gox" eventType="touchUpInside" id="HLv-Gg-kE8"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qt-lq-fN1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="igD-uN-9lM" firstAttribute="trailing" secondItem="wmk-i9-o3F" secondAttribute="trailing" constant="-8" id="GKR-CI-abT"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="top" secondItem="4qt-lq-fN1" secondAttribute="top" id="Kgi-sz-8zQ"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="bottom" secondItem="4qt-lq-fN1" secondAttribute="bottom" id="P6C-q4-jxk"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="trailing" secondItem="4qt-lq-fN1" secondAttribute="trailing" id="Xem-Ce-NYN"/>
-                            <constraint firstItem="wmk-i9-o3F" firstAttribute="top" secondItem="igD-uN-9lM" secondAttribute="bottom" constant="-30" id="pgj-jK-U5t"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="leading" secondItem="4qt-lq-fN1" secondAttribute="leading" id="xre-4z-8JY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mCx-Fu-I2p"/>
                     <connections>
                         <outlet property="noteTextView" destination="wmk-i9-o3F" id="ybx-Kl-k5w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428.985507246377" y="5.7065217391304355"/>
+            <point key="canvasLocation" x="2243" y="6"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GHs-8T-CUl">
