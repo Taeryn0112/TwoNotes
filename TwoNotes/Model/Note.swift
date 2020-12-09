@@ -6,20 +6,33 @@
 //
 
 import UIKit
+import RealmSwift
 
-public class Note: NSObject {
+public class Note: Object {
     
-    var userInput: String?
+    @objc dynamic var userInput: String? = nil
     var serialNumber: String?
     var dateCreated: Date
     
-    
-    init(userInput: String?) {
+    override init() {
         let uniqueSerialNumber =
         UUID().uuidString.components(separatedBy: "-").first!
-        self.userInput = userInput
+        
         self.dateCreated = Date()
         self.serialNumber = uniqueSerialNumber
+    }
+    
+    convenience init(userInput: String?) {
+        self.init()
+        self.userInput = userInput
+        
+    }
+    
+    func save() {
+        let realm = try! Realm()
+        try! realm.write() {
+            realm.add(self)
+        }
     }
     
 }

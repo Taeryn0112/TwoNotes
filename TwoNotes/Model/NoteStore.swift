@@ -7,11 +7,11 @@
 
 import UIKit
 
+
 class NoteStore {
     
     var allNote = [Note]()
    
-    
     func storeNote(_ note: Note) {
         
         allNote.append(note)
