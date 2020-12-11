@@ -12,10 +12,15 @@ import RealmSwift
 public class NotesTableViewController: UITableViewController {
     
     var noteStore: NoteStore!
-  
+    var notesViewController: NotesViewController!
+    //MARK: Views
+    
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+//        DispatchQueue.main.async {
+//            self.getNotesObject(for: Date())
+//        }
     }
     
   
@@ -38,6 +43,8 @@ public class NotesTableViewController: UITableViewController {
         
     }
     
+    
+    //MARK: TableViews
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

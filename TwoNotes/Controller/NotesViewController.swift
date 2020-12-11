@@ -16,14 +16,10 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let realm = try! Realm()
-        var userInputText = noteTextView.text
+        let userInputText = noteTextView.text
         
         note.userInput = userInputText
-        
-//        try! realm.write {
-//            realm.add(note)
-//        }
+        note.save()
         
     }
     
@@ -33,10 +29,17 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        noteTextView.text = note.userInput
+    }
+    
     @objc public func doneTapped() {
         print("done")
         noteTextView.resignFirstResponder()
     }
+    
     
 }
 
