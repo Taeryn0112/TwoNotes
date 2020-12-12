@@ -33,6 +33,7 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
         
         noteTextView.text = note.userInput
+        
     }
     
     @objc public func doneTapped() {

@@ -30,15 +30,15 @@ public class Note: Object {
     //MARK: Realm functions
     
     func fetchNotesFromDataBase() -> Results<Note> {
-        let realm = try! Realm()
-        let notes = realm.objects(Note.self)
-        return notes
+        
+        let notes = realm?.objects(Note.self)
+        return notes!
     }
     
     func save() {
-        let realm = try! Realm()
-        try! realm.write() {
-            realm.add(self)
+        
+        try! realm?.write() {
+            realm?.add(self)
         }
     }
     

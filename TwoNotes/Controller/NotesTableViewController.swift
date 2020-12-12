@@ -13,6 +13,7 @@ public class NotesTableViewController: UITableViewController {
     
     var noteStore: NoteStore!
     var notesViewController: NotesViewController!
+    
     //MARK: Views
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -23,7 +24,6 @@ public class NotesTableViewController: UITableViewController {
 //        }
     }
     
-  
     @IBAction func toggleEditingMode(_ sender: UIButton) {
         if isEditing {
             
@@ -56,6 +56,7 @@ public class NotesTableViewController: UITableViewController {
         
         let note = noteStore.allNote[indexPath.row]
         cell.userInputLabel.text = note.userInput
+        cell.detailTextLabel?.text = nil
         return cell
     }
     
@@ -89,6 +90,8 @@ public class NotesTableViewController: UITableViewController {
         
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
+    
+    //MARK: Segue
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
