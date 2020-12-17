@@ -19,9 +19,7 @@ public class NotesTableViewController: UITableViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-//        DispatchQueue.main.async {
-//            self.getNotesObject(for: Date())
-//        }
+
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton) {
