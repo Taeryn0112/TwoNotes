@@ -11,15 +11,18 @@ import RealmSwift
 public class NotesViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noteTextView: UITextView!
     
-        var note: Note!
-        
+    var note: Note!
+    var notes = SceneDelegate.realm
+    
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let userInputText = noteTextView.text
         
+        let userInputText = noteTextView.text
         note.userInput = userInputText
+        
         note.save()
+        
         
     }
     
@@ -33,6 +36,10 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
         
         noteTextView.text = note.userInput
+        try! self.notes.write {
+            
+            self.note.realm?.objects(Note.self)
+        }
         
     }
     

@@ -11,15 +11,22 @@ import RealmSwift
 
 public class NotesTableViewController: UITableViewController {
     
-    var noteStore: NoteStore!
+    
+    var notes = SceneDelegate.realm
+    var note: Results<Note> {
+        get {
+            return self.notes.objects(Note.self)
+        }
+    }
     var notesViewController: NotesViewController!
+    var noteStore: NoteStore!
     
     //MARK: Views
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-
+        
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton) {
@@ -38,7 +45,7 @@ public class NotesTableViewController: UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(noteStore.allNote)
     }
     
     
@@ -46,14 +53,19 @@ public class NotesTableViewController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return noteStore.allNote.count
+        return note.count
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         
-        let note = noteStore.allNote[indexPath.row]
-        cell.userInputLabel.text = note.userInput
+        let notes = note[indexPath.row]
+        
+        try! self.notes.write {
+            self.notes.add(note)
+        }
+        
+        cell.userInputLabel.text = notes.userInput
         cell.detailTextLabel?.text = nil
         return cell
     }
@@ -61,9 +73,9 @@ public class NotesTableViewController: UITableViewController {
     public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            let note = noteStore.allNote[indexPath.row]
+            let notes = note[indexPath.row]
             
-            let title = "Delete \(note.userInput)"
+            let title = "Delete \(notes.userInput)"
             let message = "Are you sure you want to delete this note?"
             
             let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -73,8 +85,13 @@ public class NotesTableViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-                self.noteStore.removeNote(note)
+//                self.noteStore.removeNote(note)
                 
+                
+                
+                try! self.notes.write {
+                    self.notes.delete(notes)
+                }
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(deleteAction)
@@ -95,13 +112,19 @@ public class NotesTableViewController: UITableViewController {
         switch segue.identifier {
         case "showNote"?:
             if let row = tableView.indexPathForSelectedRow?.row {
-                let note = noteStore.allNote[row]
+                try! self.notes.write {
+                    
+                    self.note.realm?.objects(Note.self)
+                }
+                let notes = note[row]
                 let notesViewController = segue.destination as! NotesViewController
-                notesViewController.note = note
+                notesViewController.note = notes
             }
         case "addNewNote"?:
             let newNote = Note(userInput: "")
-            noteStore.storeNote(newNote)
+            
+            
+//            noteStore.storeNote(newNote)
             if let index = noteStore.allNote.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 

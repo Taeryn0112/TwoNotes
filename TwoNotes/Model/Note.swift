@@ -36,9 +36,9 @@ public class Note: Object {
     }
     
     func save() {
-        
-        try! realm?.write() {
-            realm?.add(self)
+        let realm = SceneDelegate.realm
+        try! realm.write() {
+            realm.add(self)
         }
     }
     
