@@ -11,20 +11,25 @@ import RealmSwift
 public class Note: Object {
     
     @objc dynamic var userInput: String? = nil
-    @objc dynamic var serialNumber: String? = nil
+    @objc dynamic var serialNumber = ObjectId.generate()
     var dateCreated: Date
     
     override init() {
-        let uniqueSerialNumber =
-        UUID().uuidString.components(separatedBy: "-").first!
+//        let uniqueSerialNumber =
+//        UUID().uuidString.components(separatedBy: "-").first!
         self.dateCreated = Date()
-        self.serialNumber = uniqueSerialNumber
+//        self.serialNumber = uniqueSerialNumber
     }
     
     convenience init(userInput: String?) {
         self.init()
         self.userInput = userInput
         
+    }
+    
+    public override static func primaryKey() -> String? {
+
+        return "serialNumber"
     }
     
     //MARK: Realm functions

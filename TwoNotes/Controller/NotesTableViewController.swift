@@ -26,7 +26,6 @@ public class NotesTableViewController: UITableViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton) {
@@ -62,7 +61,7 @@ public class NotesTableViewController: UITableViewController {
         let notes = note[indexPath.row]
         
         try! self.notes.write {
-            self.notes.add(note)
+            self.notes.add(notes)
         }
         
         cell.userInputLabel.text = notes.userInput
@@ -85,10 +84,6 @@ public class NotesTableViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-//                self.noteStore.removeNote(note)
-                
-                
-                
                 try! self.notes.write {
                     self.notes.delete(notes)
                 }
@@ -106,6 +101,7 @@ public class NotesTableViewController: UITableViewController {
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
+    
     //MARK: Segue
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,6 +112,7 @@ public class NotesTableViewController: UITableViewController {
                     
                     self.note.realm?.objects(Note.self)
                 }
+                
                 let notes = note[row]
                 let notesViewController = segue.destination as! NotesViewController
                 notesViewController.note = notes
@@ -123,9 +120,8 @@ public class NotesTableViewController: UITableViewController {
         case "addNewNote"?:
             let newNote = Note(userInput: "")
             
-            
 //            noteStore.storeNote(newNote)
-            if let index = noteStore.allNote.firstIndex(of: newNote) {
+            if let index = note.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 
                 tableView.insertRows(at: [indexPath], with: .automatic)

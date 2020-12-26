@@ -17,13 +17,13 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        
-        let userInputText = noteTextView.text
-        note.userInput = userInputText
-        
-        note.save()
-        
-        
+        try! notes.write {
+            
+            guard let userInput = notes.object(ofType: Note.self, forPrimaryKey: note.serialNumber) else { return }
+            
+            var userInputText = noteTextView.text
+            note.userInput = userInputText
+        }
     }
     
     public override func viewDidLoad() {
@@ -35,13 +35,14 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        noteTextView.text = note.userInput
-        try! self.notes.write {
-            
-            self.note.realm?.objects(Note.self)
-        }
+
+        print(note.serialNumber)
         
+        noteTextView.text = note.userInput
+        note.save()
     }
+    
+    
     
     @objc public func doneTapped() {
         print("done")
