@@ -21,9 +21,12 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
             
             guard let userInput = notes.object(ofType: Note.self, forPrimaryKey: note.serialNumber) else { return }
             
-            var userInputText = noteTextView.text
+            let userInputText = noteTextView.text
             note.userInput = userInputText
+            
         }
+        
+        
     }
     
     public override func viewDidLoad() {

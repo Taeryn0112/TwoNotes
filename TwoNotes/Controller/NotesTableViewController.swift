@@ -15,7 +15,7 @@ public class NotesTableViewController: UITableViewController {
     var notes = SceneDelegate.realm
     var note: Results<Note> {
         get {
-            return self.notes.objects(Note.self)
+            return self.notes.objects(Note.self).sorted(byKeyPath: "serialNumber")
         }
     }
     var notesViewController: NotesViewController!
@@ -61,6 +61,7 @@ public class NotesTableViewController: UITableViewController {
         let notes = note[indexPath.row]
         
         try! self.notes.write {
+            
             self.notes.add(notes)
         }
         
@@ -100,6 +101,7 @@ public class NotesTableViewController: UITableViewController {
         
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
+
     
     
     //MARK: Segue
