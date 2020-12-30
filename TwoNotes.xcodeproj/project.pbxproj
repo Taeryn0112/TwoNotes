@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D5832CF6976B8F501B05475 /* Pods_TwoNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFF47E057782C07D51D181 /* Pods_TwoNotes.framework */; };
+		24FDF30C70725276FD706B43 /* Pods_TwoNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20750FB5686876AE6E3B4905 /* Pods_TwoNotes.framework */; };
 		E95129132579A22D00E6552C /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95129122579A22D00E6552C /* NoteStore.swift */; };
 		E954B5DC257C749200221416 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954B5DB257C749200221416 /* NoteCell.swift */; };
 		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
@@ -40,9 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5C72FBA037CB9CE09E0330E0 /* Pods-TwoNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.debug.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.debug.xcconfig"; sourceTree = "<group>"; };
-		79EFF47E057782C07D51D181 /* Pods_TwoNotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoNotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		995D46FD7276FB7761AD9D59 /* Pods-TwoNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.release.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.release.xcconfig"; sourceTree = "<group>"; };
+		20750FB5686876AE6E3B4905 /* Pods_TwoNotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoNotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3A068115D3A21BEF25AEB46 /* Pods-TwoNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.debug.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.debug.xcconfig"; sourceTree = "<group>"; };
+		CDF09794547E8E2F756E0CD9 /* Pods-TwoNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.release.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.release.xcconfig"; sourceTree = "<group>"; };
 		E95129122579A22D00E6552C /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		E954B5DB257C749200221416 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D5832CF6976B8F501B05475 /* Pods_TwoNotes.framework in Frameworks */,
+				24FDF30C70725276FD706B43 /* Pods_TwoNotes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,18 +92,10 @@
 		571042F547656C061C3A0E00 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C72FBA037CB9CE09E0330E0 /* Pods-TwoNotes.debug.xcconfig */,
-				995D46FD7276FB7761AD9D59 /* Pods-TwoNotes.release.xcconfig */,
+				C3A068115D3A21BEF25AEB46 /* Pods-TwoNotes.debug.xcconfig */,
+				CDF09794547E8E2F756E0CD9 /* Pods-TwoNotes.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		659AAA64C45ED0C03204494E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				79EFF47E057782C07D51D181 /* Pods_TwoNotes.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E97FC3E525775CCF002CBC08 = {
@@ -114,7 +106,7 @@
 				E97FC41225775CD1002CBC08 /* TwoNotesUITests */,
 				E97FC3EF25775CD0002CBC08 /* Products */,
 				571042F547656C061C3A0E00 /* Pods */,
-				659AAA64C45ED0C03204494E /* Frameworks */,
+				F80324189438FF61BC76312B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,6 +180,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		F80324189438FF61BC76312B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20750FB5686876AE6E3B4905 /* Pods_TwoNotes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -195,11 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E97FC41825775CD1002CBC08 /* Build configuration list for PBXNativeTarget "TwoNotes" */;
 			buildPhases = (
-				D328EB6A8557DFB3ECBAC4BA /* [CP] Check Pods Manifest.lock */,
+				D6BBAC18A012F6EE58FD5F61 /* [CP] Check Pods Manifest.lock */,
 				E97FC3EA25775CD0002CBC08 /* Sources */,
 				E97FC3EB25775CD0002CBC08 /* Frameworks */,
 				E97FC3EC25775CD0002CBC08 /* Resources */,
-				115999AF49AA79432760A9FA /* [CP] Embed Pods Frameworks */,
+				531FC192F617024BD51EC607 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -316,7 +316,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		115999AF49AA79432760A9FA /* [CP] Embed Pods Frameworks */ = {
+		531FC192F617024BD51EC607 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,7 +333,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TwoNotes/Pods-TwoNotes-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D328EB6A8557DFB3ECBAC4BA /* [CP] Check Pods Manifest.lock */ = {
+		D6BBAC18A012F6EE58FD5F61 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -541,7 +541,7 @@
 		};
 		E97FC41925775CD1002CBC08 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C72FBA037CB9CE09E0330E0 /* Pods-TwoNotes.debug.xcconfig */;
+			baseConfigurationReference = C3A068115D3A21BEF25AEB46 /* Pods-TwoNotes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -561,7 +561,7 @@
 		};
 		E97FC41A25775CD1002CBC08 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 995D46FD7276FB7761AD9D59 /* Pods-TwoNotes.release.xcconfig */;
+			baseConfigurationReference = CDF09794547E8E2F756E0CD9 /* Pods-TwoNotes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

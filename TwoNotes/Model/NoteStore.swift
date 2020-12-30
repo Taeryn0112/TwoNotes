@@ -8,41 +8,45 @@
 import UIKit
 import RealmSwift
 
+/*
+ This class handles all operations related to `Note` objects.
+ This includes:
+ - fetching all notes from the database
+ - saving/creating notes to the database
+ - updating notes to the database
+ - deleting notes from the database
+ */
+
 class NoteStore {
-    
+    private let realm = try! Realm()
     var allNote = [Note]()
+
+    init() {
+        self.fetchNotesFromDataBase()
+    }
+    
+    func fetchNotesFromDataBase()  {
+        let notes = Array(realm.objects(Note.self).sorted(byKeyPath: "serialNumber", ascending: false))
+        self.allNote = notes
+    }
+    
+    private func save(_ note: Note) {
+        try! realm.write {
+            realm.add(note)
+        }
+    }
+
+    func deleteNote(_ note: Note) {
+        try! self.realm.write {
+            self.realm.delete(note)
+        }
+    }
     
     func storeNote(_ note: Note) {
-        
-//        allNote.append(note)
-        let notes = SceneDelegate.realm
-        
-        try! notes.write {
-            //fetch the recent note
-            let fetchNote = notes.objects(Note.self)
-            
-            
-        }
+        save(note)
+        fetchNotesFromDataBase()
     }
     
-//    func fetchNotesFromDataBase() -> Results<Note> {
-//        
-//        let notes = realm?.objects(Note.self)
-//        return notes!
-//    }
-    
-    
-    func removeNote(_ note: Note) {
-        if let index = allNote.firstIndex(of: note) {
-            allNote.remove(at: index)
-            let notes = SceneDelegate.realm
-            
-            try! notes.write {
-                
-                
-            }
-        }
-    }
     
     func moveItem(from fromIndex: Int, to toIndex: Int) {
         if fromIndex == toIndex {
@@ -54,11 +58,5 @@ class NoteStore {
         allNote.remove(at: fromIndex)
         
         allNote.insert(originalNote, at: toIndex)
-        
-        
-        
     }
-    
-    
-    
 }

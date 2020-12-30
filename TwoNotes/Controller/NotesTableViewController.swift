@@ -11,13 +11,6 @@ import RealmSwift
 
 public class NotesTableViewController: UITableViewController {
     
-    
-    var notes = SceneDelegate.realm
-    var note: Results<Note> {
-        get {
-            return self.notes.objects(Note.self).sorted(byKeyPath: "serialNumber")
-        }
-    }
     var notesViewController: NotesViewController!
     var noteStore: NoteStore!
     
@@ -44,28 +37,19 @@ public class NotesTableViewController: UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        print(noteStore.allNote)
     }
     
     
     //MARK: TableViews
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return note.count
+        return noteStore.allNote.count
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
-        
-        let notes = note[indexPath.row]
-        
-        try! self.notes.write {
-            
-            self.notes.add(notes)
-        }
-        
-        cell.userInputLabel.text = notes.userInput
+        let note = noteStore.allNote[indexPath.row]
+        cell.userInputLabel.text = note.userInput
         cell.detailTextLabel?.text = nil
         return cell
     }
@@ -73,7 +57,7 @@ public class NotesTableViewController: UITableViewController {
     public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            let notes = note[indexPath.row]
+            let notes = noteStore.allNote[indexPath.row]
             
             let title = "Delete \(notes.userInput)"
             let message = "Are you sure you want to delete this note?"
@@ -85,9 +69,10 @@ public class NotesTableViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-                try! self.notes.write {
-                    self.notes.delete(notes)
-                }
+//                try! self.notes.write {
+//                    self.notes.delete(notes)
+//                }
+                self.noteStore.deleteNote(notes)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(deleteAction)
@@ -100,9 +85,8 @@ public class NotesTableViewController: UITableViewController {
     public override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        tableView.reloadData()
     }
-
-    
     
     //MARK: Segue
     
@@ -110,30 +94,32 @@ public class NotesTableViewController: UITableViewController {
         switch segue.identifier {
         case "showNote"?:
             if let row = tableView.indexPathForSelectedRow?.row {
-                try! self.notes.write {
-                    
-                    self.note.realm?.objects(Note.self)
-                }
+//                try! self.notes.write {
+//
+//                    self.note.realm?.objects(Note.self)
+//
+//                }
                 
-                let notes = note[row]
+                let notes = noteStore.allNote[row]
                 let notesViewController = segue.destination as! NotesViewController
-                notesViewController.note = notes
+                notesViewController.noteObject = notes
             }
         case "addNewNote"?:
             let newNote = Note(userInput: "")
             
-//            noteStore.storeNote(newNote)
-            if let index = note.firstIndex(of: newNote) {
+            noteStore.storeNote(newNote)
+            if let index = noteStore.allNote.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
             let notesViewController = segue.destination as! NotesViewController
                   
-            notesViewController.note = newNote
+            notesViewController.noteObject = newNote
             
         default: preconditionFailure("Unexpected segue identifier")
         }
     }
     
 }
+
