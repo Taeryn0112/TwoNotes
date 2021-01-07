@@ -17,17 +17,19 @@ import RealmSwift
  - deleting notes from the database
  */
 
-class NoteStore {
+public class NoteStore {
     private let realm = try! Realm()
     var allNote = [Note]()
-
+    
     init() {
         self.fetchNotesFromDataBase()
     }
     
-    func fetchNotesFromDataBase()  {
-        let notes = Array(realm.objects(Note.self).sorted(byKeyPath: "serialNumber", ascending: false))
+    // Load all the notes when the app starts
+    func fetchNotesFromDataBase() {
+        let notes = Array(realm.objects(Note.self).sorted(byKeyPath: "orderingValue", ascending: true))
         self.allNote = notes
+        
     }
     
     private func save(_ note: Note) {
@@ -40,11 +42,18 @@ class NoteStore {
         try! self.realm.write {
             self.realm.delete(note)
         }
+        // remove the note from allNotes
+        if let index = allNote.firstIndex(of: note) {
+            allNote.remove(at: index)
+        }
+        // update ordering value
+        updateOrderingValue()
     }
     
     func storeNote(_ note: Note) {
         save(note)
-        fetchNotesFromDataBase()
+        allNote.insert(note, at: 0)
+        updateOrderingValue()
     }
     
     
@@ -54,9 +63,23 @@ class NoteStore {
         }
         
         let originalNote = allNote[fromIndex]
-        
+
         allNote.remove(at: fromIndex)
-        
         allNote.insert(originalNote, at: toIndex)
+
+        updateOrderingValue()
+
     }
+    
+    private func updateOrderingValue() {
+        // for all the items in the allNotes array
+        // update the orderingValue to the index in the array
+        try! realm.write {
+        for note in allNote {
+            if let index = allNote.firstIndex(of: note) {
+                note.orderingValue = index
+            }
+        }
+     }
+  }
 }

@@ -14,6 +14,7 @@ public class NotesTableViewController: UITableViewController {
     var notesViewController: NotesViewController!
     var noteStore: NoteStore!
     
+    
     //MARK: Views
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -33,10 +34,6 @@ public class NotesTableViewController: UITableViewController {
             
             setEditing(true, animated: true)
         }
-    }
-    
-    public override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     
@@ -69,23 +66,25 @@ public class NotesTableViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-//                try! self.notes.write {
-//                    self.notes.delete(notes)
+//                try! self.realm.write {
+//                    self.realm.delete(notes)
+//
 //                }
                 self.noteStore.deleteNote(notes)
+                
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(deleteAction)
-           
+            
             present(ac, animated: true, completion: nil)
         }
         
     }
 
     public override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
+        print(noteStore.allNote)
     }
     
     //MARK: Segue
@@ -103,8 +102,10 @@ public class NotesTableViewController: UITableViewController {
                 let notes = noteStore.allNote[row]
                 let notesViewController = segue.destination as! NotesViewController
                 notesViewController.noteObject = notes
+                
             }
         case "addNewNote"?:
+            
             let newNote = Note(userInput: "")
             
             noteStore.storeNote(newNote)

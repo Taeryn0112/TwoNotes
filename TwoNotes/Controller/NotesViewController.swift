@@ -10,21 +10,20 @@ import RealmSwift
 
 public class NotesViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noteTextView: UITextView!
-    
     var noteObject: Note!
-    var notes = SceneDelegate.realm
-    var notesTVC: NotesTableViewController!
+    var realm = SceneDelegate.realm
+    
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        try! notes.write {
-            
-            guard let userInput = notes.object(ofType: Note.self, forPrimaryKey: noteObject.serialNumber) else { return }
-            
+        try! realm.write {
+
+            guard let userInput = realm.object(ofType: Note.self, forPrimaryKey: noteObject.serialNumber) else { return }
             let userInputText = noteTextView.text
             noteObject.userInput = userInputText
-            
         }
+        
+        
     }
     
     public override func viewDidLoad() {
@@ -36,8 +35,6 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-
-        print(noteObject.serialNumber)
         
         noteTextView.text = noteObject.userInput
     }
