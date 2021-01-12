@@ -30,11 +30,12 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        
+        startObserving(&UserInterfaceStyleManager.shared)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         noteTextView.text = noteObject.userInput
     }

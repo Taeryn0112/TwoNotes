@@ -10,6 +10,11 @@
 		24FDF30C70725276FD706B43 /* Pods_TwoNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20750FB5686876AE6E3B4905 /* Pods_TwoNotes.framework */; };
 		E95129132579A22D00E6552C /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95129122579A22D00E6552C /* NoteStore.swift */; };
 		E954B5DC257C749200221416 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954B5DB257C749200221416 /* NoteCell.swift */; };
+		E9633A7D25AD2B1100B77037 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9633A7C25AD2B1100B77037 /* NavigationViewController.swift */; };
+		E967402525AC1303005A2D59 /* UserInterfaceStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402225AC1302005A2D59 /* UserInterfaceStyleManager.swift */; };
+		E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402325AC1302005A2D59 /* WeakStyleObserver.swift */; };
+		E967402725AC1303005A2D59 /* UserInterfaceStyleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402425AC1303005A2D59 /* UserInterfaceStyleObserver.swift */; };
+		E967402D25AC1789005A2D59 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402C25AC1789005A2D59 /* SettingsViewController.swift */; };
 		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
 		E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */; };
 		E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3F725775CD0002CBC08 /* Main.storyboard */; };
@@ -45,6 +50,11 @@
 		CDF09794547E8E2F756E0CD9 /* Pods-TwoNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.release.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.release.xcconfig"; sourceTree = "<group>"; };
 		E95129122579A22D00E6552C /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		E954B5DB257C749200221416 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		E9633A7C25AD2B1100B77037 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		E967402225AC1302005A2D59 /* UserInterfaceStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInterfaceStyleManager.swift; sourceTree = "<group>"; };
+		E967402325AC1302005A2D59 /* WeakStyleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakStyleObserver.swift; sourceTree = "<group>"; };
+		E967402425AC1303005A2D59 /* UserInterfaceStyleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInterfaceStyleObserver.swift; sourceTree = "<group>"; };
+		E967402C25AC1789005A2D59 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97FC3F125775CD0002CBC08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +108,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E967402B25AC173C005A2D59 /* Observer */ = {
+			isa = PBXGroup;
+			children = (
+				E967402425AC1303005A2D59 /* UserInterfaceStyleObserver.swift */,
+				E967402225AC1302005A2D59 /* UserInterfaceStyleManager.swift */,
+				E967402325AC1302005A2D59 /* WeakStyleObserver.swift */,
+			);
+			path = Observer;
+			sourceTree = "<group>";
+		};
 		E97FC3E525775CCF002CBC08 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +145,7 @@
 			children = (
 				E97FC3F125775CD0002CBC08 /* AppDelegate.swift */,
 				E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */,
+				E967402B25AC173C005A2D59 /* Observer */,
 				E990300D257860BA00EB09AC /* Model */,
 				E990300F257860EF00EB09AC /* Controller */,
 				E990300E257860D100EB09AC /* View */,
@@ -176,6 +197,8 @@
 			children = (
 				E9903008257860A500EB09AC /* NotesTableViewController.swift */,
 				E99030182578774C00EB09AC /* NotesViewController.swift */,
+				E9633A7C25AD2B1100B77037 /* NavigationViewController.swift */,
+				E967402C25AC1789005A2D59 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -362,12 +385,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9633A7D25AD2B1100B77037 /* NavigationViewController.swift in Sources */,
+				E967402725AC1303005A2D59 /* UserInterfaceStyleObserver.swift in Sources */,
 				E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */,
+				E967402D25AC1789005A2D59 /* SettingsViewController.swift in Sources */,
 				E99030192578774C00EB09AC /* NotesViewController.swift in Sources */,
 				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
+				E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */,
 				E95129132579A22D00E6552C /* NoteStore.swift in Sources */,
 				E9903009257860A500EB09AC /* NotesTableViewController.swift in Sources */,
 				E954B5DC257C749200221416 /* NoteCell.swift in Sources */,
+				E967402525AC1303005A2D59 /* UserInterfaceStyleManager.swift in Sources */,
 				E99030142578664900EB09AC /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

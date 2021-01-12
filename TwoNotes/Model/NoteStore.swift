@@ -66,7 +66,7 @@ public class NoteStore {
 
         allNote.remove(at: fromIndex)
         allNote.insert(originalNote, at: toIndex)
-
+        
         updateOrderingValue()
 
     }
