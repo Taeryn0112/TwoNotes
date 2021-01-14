@@ -9,8 +9,9 @@ import UIKit
 import Foundation
 import RealmSwift
 
-public class NotesTableViewController: UITableViewController {
+public class NotesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var notesTableView: UITableView!
     var notesViewController: NotesViewController!
     var noteStore: NoteStore!
     
@@ -21,11 +22,14 @@ public class NotesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         startObserving(&UserInterfaceStyleManager.shared)
+        self.title = "Two Notes"
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        notesTableView.reloadData()
+        
+        
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton) {
@@ -45,19 +49,19 @@ public class NotesTableViewController: UITableViewController {
     
     //MARK: TableViews
     
-    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return noteStore.allNote.count
     }
     
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
-        cell.userInputLabel.text = note.userInput
+        cell.userInputLabel.text = note.userInput 
         cell.detailTextLabel?.text = nil
         return cell
     }
     
-    public override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             let notes = noteStore.allNote[indexPath.row]
@@ -73,7 +77,7 @@ public class NotesTableViewController: UITableViewController {
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
                 self.noteStore.deleteNote(notes)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.notesTableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(deleteAction)
             
@@ -82,7 +86,7 @@ public class NotesTableViewController: UITableViewController {
         
     }
 
-    public override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
         
@@ -93,7 +97,7 @@ public class NotesTableViewController: UITableViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showNote"?:
-            if let row = tableView.indexPathForSelectedRow?.row {
+            if let row = notesTableView.indexPathForSelectedRow?.row {
                 
                 let notes = noteStore.allNote[row]
                 let notesViewController = segue.destination as! NotesViewController
@@ -108,7 +112,8 @@ public class NotesTableViewController: UITableViewController {
             if let index = noteStore.allNote.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 
-                tableView.insertRows(at: [indexPath], with: .automatic)
+                self.notesTableView.insertRows(at: [indexPath], with: .automatic)
+                
             }
             let notesViewController = segue.destination as! NotesViewController
                   
