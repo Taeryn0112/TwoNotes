@@ -9,12 +9,11 @@ import UIKit
 import Foundation
 import RealmSwift
 
-public class NotesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+public class NotesMainViewController: UIViewController{
     
-    @IBOutlet weak var notesTableView: UITableView!
     var notesViewController: NotesViewController!
     var noteStore: NoteStore!
-    
+    @IBOutlet weak var noteTableView: UITableView!
     
     //MARK: Views
     
@@ -23,13 +22,20 @@ public class NotesTableViewController: UIViewController, UITableViewDelegate, UI
         
         startObserving(&UserInterfaceStyleManager.shared)
         self.title = "Two Notes"
+        noteTableView.delegate = self
+        noteTableView.dataSource = self
+        noteTableView.reloadData()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notesTableView.reloadData()
+        noteTableView.reloadData()
         
-        
+    }
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        noteTableView.reloadData()
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton) {
@@ -47,6 +53,39 @@ public class NotesTableViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
+    //MARK: Segue
+    
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showNote"?:
+            if let row = noteTableView.indexPathForSelectedRow?.row {
+                
+                let notes = noteStore.allNote[row]
+                let notesViewController = segue.destination as! NotesViewController
+                notesViewController.noteObject = notes
+            }
+        case "addNewNote"?:
+            
+            let newNote = Note(userInput: "")
+            noteStore.storeNote(newNote)
+            
+            if let index = noteStore.allNote.firstIndex(of: newNote) {
+                let indexPath = IndexPath(row: index, section: 0)
+                
+                self.noteTableView.insertRows(at: [indexPath], with: .automatic)
+                
+            }
+            let notesViewController = segue.destination as! NotesViewController
+                  
+            notesViewController.noteObject = newNote
+            
+        default: preconditionFailure("Unexpected segue identifier")
+        }
+    }
+}
+
+extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
+    
     //MARK: TableViews
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,9 +95,13 @@ public class NotesTableViewController: UIViewController, UITableViewDelegate, UI
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
-        cell.userInputLabel.text = note.userInput 
+        cell.userInputLabel.text = note.userInput
         cell.detailTextLabel?.text = nil
         return cell
+    }
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -77,7 +120,7 @@ public class NotesTableViewController: UIViewController, UITableViewDelegate, UI
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
                 self.noteStore.deleteNote(notes)
-                self.notesTableView.deleteRows(at: [indexPath], with: .automatic)
+                self.noteTableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(deleteAction)
             
@@ -92,39 +135,4 @@ public class NotesTableViewController: UIViewController, UITableViewDelegate, UI
         
     }
     
-    //MARK: Segue
-    
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "showNote"?:
-            if let row = notesTableView.indexPathForSelectedRow?.row {
-                
-                let notes = noteStore.allNote[row]
-                let notesViewController = segue.destination as! NotesViewController
-                notesViewController.noteObject = notes
-                
-            }
-        case "addNewNote"?:
-            
-            let newNote = Note(userInput: "")
-            noteStore.storeNote(newNote)
-            
-            if let index = noteStore.allNote.firstIndex(of: newNote) {
-                let indexPath = IndexPath(row: index, section: 0)
-                
-                self.notesTableView.insertRows(at: [indexPath], with: .automatic)
-                
-            }
-            let notesViewController = segue.destination as! NotesViewController
-                  
-            notesViewController.noteObject = newNote
-            
-        case "showSettings"?:
-            print("settings showed")
-            
-        default: preconditionFailure("Unexpected segue identifier")
-        }
-    }
-    
 }
-

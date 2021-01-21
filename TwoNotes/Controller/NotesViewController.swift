@@ -22,8 +22,6 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
             let userInputText = noteTextView.text
             noteObject.userInput = userInputText
         }
-        
-        
     }
     
     public override func viewDidLoad() {
@@ -39,8 +37,6 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         
         noteTextView.text = noteObject.userInput
     }
-    
-    
     
     @objc public func doneTapped() {
         print("done")
