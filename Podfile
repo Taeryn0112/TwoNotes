@@ -8,5 +8,6 @@ target 'TwoNotes' do
   # Pods for TwoNotes
   
   pod 'RealmSwift'
+  pod 'RoundedViews'
   
 end

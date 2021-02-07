@@ -9,11 +9,13 @@ import UIKit
 import Foundation
 import RealmSwift
 
+
 public class NotesMainViewController: UIViewController{
     
     var notesViewController: NotesViewController!
     var noteStore: NoteStore!
     @IBOutlet weak var noteTableView: UITableView!
+    @IBOutlet weak var addNoteButtonView: UIView!
     
     //MARK: Views
     
@@ -25,6 +27,12 @@ public class NotesMainViewController: UIViewController{
         noteTableView.delegate = self
         noteTableView.dataSource = self
         noteTableView.reloadData()
+//        addNoteButtonView.layer.cornerRadius = addNoteButtonView.frame.size.width/2
+//        addNoteButtonView.clipsToBounds = true
+//        addNoteButtonView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+//        addNoteButtonView.layer.borderWidth = 5.0
+        
+        
     }
     
     public override func viewWillAppear(_ animated: Bool) {

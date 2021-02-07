@@ -1,22 +1,26 @@
 PODS:
-  - Realm (10.2.0):
-    - Realm/Headers (= 10.2.0)
-  - Realm/Headers (10.2.0)
-  - RealmSwift (10.2.0):
-    - Realm (= 10.2.0)
+  - Realm (10.5.1):
+    - Realm/Headers (= 10.5.1)
+  - Realm/Headers (10.5.1)
+  - RealmSwift (10.5.1):
+    - Realm (= 10.5.1)
+  - RoundedViews (1.0.2)
 
 DEPENDENCIES:
   - RealmSwift
+  - RoundedViews
 
 SPEC REPOS:
   trunk:
     - Realm
     - RealmSwift
+    - RoundedViews
 
 SPEC CHECKSUMS:
-  Realm: d7914ebf66bb182469726f997c4c38eff286aab0
-  RealmSwift: aad08b7dc8c732b7b5794286e9df83739bf834f1
+  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
+  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+  RoundedViews: c15945e567972d09b8af6edbb36bd877e0ed4e07
 
-PODFILE CHECKSUM: f62acd6306959a4207aa258a3f808446d99e57c2
+PODFILE CHECKSUM: 1e5727654f299c8d14a45b20bcb542f6a87c4840
 
 COCOAPODS: 1.10.0
