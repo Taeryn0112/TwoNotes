@@ -8,19 +8,27 @@ PODS:
 
 DEPENDENCIES:
   - RealmSwift
-  - RoundedViews
+  - RoundedViews (from `https://github.com/Taeryn0112/RoundedViews`)
 
 SPEC REPOS:
   trunk:
     - Realm
     - RealmSwift
-    - RoundedViews
+
+EXTERNAL SOURCES:
+  RoundedViews:
+    :git: https://github.com/Taeryn0112/RoundedViews
+
+CHECKOUT OPTIONS:
+  RoundedViews:
+    :commit: a4e94873ab4e29ebd2836ad95e9ee233a3969fe0
+    :git: https://github.com/Taeryn0112/RoundedViews
 
 SPEC CHECKSUMS:
   Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
   RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
   RoundedViews: c15945e567972d09b8af6edbb36bd877e0ed4e07
 
-PODFILE CHECKSUM: 1e5727654f299c8d14a45b20bcb542f6a87c4840
+PODFILE CHECKSUM: dd24d91731d777eab85dd2d67fe3ee4e7d4db84f
 
 COCOAPODS: 1.10.0

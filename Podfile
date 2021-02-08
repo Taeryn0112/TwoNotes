@@ -8,6 +8,6 @@ target 'TwoNotes' do
   # Pods for TwoNotes
   
   pod 'RealmSwift'
-  pod 'RoundedViews'
+  pod 'RoundedViews',:git=> 'https://github.com/Taeryn0112/RoundedViews'
   
 end

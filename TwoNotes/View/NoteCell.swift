@@ -9,6 +9,11 @@ import UIKit
 
 class NoteCell: UITableViewCell {
     
-    @IBOutlet var userInputLabel: UILabel!
+    @IBOutlet weak var noteTitleLabel: UILabel!
+    @IBOutlet weak var dateImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var noteDetailLabel: UILabel!
+    @IBOutlet weak var noteImageView: UIImageView!
+    
     
 }

@@ -27,11 +27,7 @@ public class NotesMainViewController: UIViewController{
         noteTableView.delegate = self
         noteTableView.dataSource = self
         noteTableView.reloadData()
-//        addNoteButtonView.layer.cornerRadius = addNoteButtonView.frame.size.width/2
-//        addNoteButtonView.clipsToBounds = true
-//        addNoteButtonView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-//        addNoteButtonView.layer.borderWidth = 5.0
-        
+
         
     }
     
@@ -103,7 +99,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
-        cell.userInputLabel.text = note.userInput
+        cell.noteDetailLabel.text = note.userInput
         cell.detailTextLabel?.text = nil
         return cell
     }
