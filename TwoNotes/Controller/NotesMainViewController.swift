@@ -27,7 +27,10 @@ public class NotesMainViewController: UIViewController{
         noteTableView.delegate = self
         noteTableView.dataSource = self
         noteTableView.reloadData()
-
+        
+        let leftButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
+        self.navigationItem.leftBarButtonItem = leftButton
+        leftButton.tintColor = UIColor.black
         
     }
     
@@ -42,20 +45,16 @@ public class NotesMainViewController: UIViewController{
         noteTableView.reloadData()
     }
     
-    @IBAction func toggleEditingMode(_ sender: UIButton) {
-        if isEditing {
-            
-        sender.setTitle("Edit", for: .normal)
-        
-        setEditing(false, animated: true)
-        } else {
-            
-            sender.setTitle("Done", for: .normal)
-            
-            setEditing(true, animated: true)
+    @objc func showEditing(sender: UIBarButtonItem) {
+        if(self.noteTableView.isEditing == true) {
+            self.noteTableView.isEditing = false
+            self.navigationItem.leftBarButtonItem?.title = "Edit"
+        } else
+        {
+            self.noteTableView.isEditing = true
+            self.navigationItem.leftBarButtonItem?.title = "Done"
         }
     }
-    
     
     //MARK: Segue
     
