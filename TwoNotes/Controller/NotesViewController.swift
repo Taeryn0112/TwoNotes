@@ -10,6 +10,7 @@ import RealmSwift
 
 public class NotesViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var titleTextField: UITextField!
     var noteObject: Note!
     var realm = SceneDelegate.realm
     
@@ -21,6 +22,9 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
             guard let userInput = realm.object(ofType: Note.self, forPrimaryKey: noteObject.serialNumber) else { return }
             let userInputText = noteTextView.text
             noteObject.userInput = userInputText
+            let titleText = titleTextField.text
+            noteObject.noteTitle = titleText
+            
         }
     }
     
@@ -36,11 +40,13 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
         
         noteTextView.text = noteObject.userInput
+        titleTextField.text = noteObject.noteTitle
     }
     
     @objc public func doneTapped() {
         print("done")
         noteTextView.resignFirstResponder()
+        titleTextField.resignFirstResponder()
     }
     
     

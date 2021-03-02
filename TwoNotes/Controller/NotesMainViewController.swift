@@ -99,6 +99,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
         cell.noteDetailLabel.text = note.userInput
+        cell.noteTitleLabel.text = note.noteTitle
         cell.detailTextLabel?.text = nil
         return cell
     }

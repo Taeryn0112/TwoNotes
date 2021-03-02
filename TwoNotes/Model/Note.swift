@@ -10,6 +10,7 @@ import RealmSwift
 
 public class Note: Object {
     @objc dynamic var userInput: String? = nil
+    @objc dynamic var noteTitle: String? = nil
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
 //    @objc dynamic var completed = false

@@ -84,7 +84,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jt-Z9-FkU">
-                                                    <rect key="frame" x="16" y="11" width="152.5" height="24"/>
+                                                    <rect key="frame" x="13" y="11" width="152.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -116,7 +116,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="lDB-Hg-XVU" secondAttribute="trailing" id="e3W-2O-eLw"/>
                                                 <constraint firstItem="5Jt-Z9-FkU" firstAttribute="top" secondItem="RbJ-in-wsX" secondAttribute="topMargin" id="eL6-id-zXn"/>
                                                 <constraint firstItem="lDB-Hg-XVU" firstAttribute="top" secondItem="RbJ-in-wsX" secondAttribute="top" id="g2E-Gg-lno"/>
-                                                <constraint firstItem="5Jt-Z9-FkU" firstAttribute="leading" secondItem="RbJ-in-wsX" secondAttribute="leadingMargin" id="mtq-Jr-V9j"/>
+                                                <constraint firstItem="5Jt-Z9-FkU" firstAttribute="leading" secondItem="RbJ-in-wsX" secondAttribute="leadingMargin" constant="-3" id="mtq-Jr-V9j"/>
                                                 <constraint firstItem="rfk-9B-EgR" firstAttribute="top" secondItem="mXN-Lu-j3M" secondAttribute="bottom" constant="15" id="p5S-Jh-4Vs"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -228,25 +228,25 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7a-bM-jnh" userLabel="TitleLabelView">
-                                        <rect key="frame" x="0.0" y="0.0" width="47" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="59" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbk-4r-D1p">
-                                                <rect key="frame" x="2" y="6" width="45" height="20"/>
+                                                <rect key="frame" x="2.5" y="6" width="56" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="wbk-4r-D1p" firstAttribute="height" secondItem="T7a-bM-jnh" secondAttribute="height" multiplier="0.621212" constant="-1.1515151515151487" id="Y4z-F3-BD1"/>
                                             <constraint firstItem="wbk-4r-D1p" firstAttribute="centerX" secondItem="T7a-bM-jnh" secondAttribute="centerX" constant="1" id="g7x-9M-Uw1"/>
                                             <constraint firstItem="wbk-4r-D1p" firstAttribute="centerY" secondItem="T7a-bM-jnh" secondAttribute="centerY" constant="-1" id="tdd-cA-XTP"/>
-                                            <constraint firstItem="wbk-4r-D1p" firstAttribute="width" secondItem="T7a-bM-jnh" secondAttribute="width" multiplier="0.737705" constant="10.327868852459012" id="zyZ-XR-uqE"/>
+                                            <constraint firstItem="wbk-4r-D1p" firstAttribute="width" secondItem="T7a-bM-jnh" secondAttribute="width" multiplier="0.737705" constant="12.114750000000001" id="zyZ-XR-uqE"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-aC-8xq" userLabel="TitleTexFieldView">
-                                        <rect key="frame" x="47" y="0.0" width="328" height="34"/>
+                                        <rect key="frame" x="62.5" y="0.0" width="312.5" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Enter the title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sbi-nb-kjG">
                                                 <rect key="frame" x="0.0" y="0.0" width="275" height="34"/>
@@ -254,12 +254,12 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Sbi-nb-kjG" firstAttribute="centerY" secondItem="hcj-aC-8xq" secondAttribute="centerY" id="6kW-18-GBY"/>
-                                            <constraint firstItem="Sbi-nb-kjG" firstAttribute="width" secondItem="hcj-aC-8xq" secondAttribute="width" multiplier="0.884244" constant="-15.03215434083603" id="Cun-KL-ohA"/>
+                                            <constraint firstItem="Sbi-nb-kjG" firstAttribute="width" secondItem="hcj-aC-8xq" secondAttribute="width" multiplier="0.884244" constant="-1.5931480000000136" id="Cun-KL-ohA"/>
                                             <constraint firstItem="Sbi-nb-kjG" firstAttribute="height" secondItem="hcj-aC-8xq" secondAttribute="height" id="ghT-Ev-1QN"/>
-                                            <constraint firstItem="Sbi-nb-kjG" firstAttribute="centerX" secondItem="hcj-aC-8xq" secondAttribute="centerX" constant="-26.5" id="s9h-P3-wkR"/>
+                                            <constraint firstItem="Sbi-nb-kjG" firstAttribute="centerX" secondItem="hcj-aC-8xq" secondAttribute="centerX" constant="-18.75" id="s9h-P3-wkR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -270,9 +270,9 @@
                                     <constraint firstAttribute="trailing" secondItem="hcj-aC-8xq" secondAttribute="trailing" id="3cx-fX-NXZ"/>
                                     <constraint firstItem="T7a-bM-jnh" firstAttribute="top" secondItem="cOJ-f9-cCS" secondAttribute="top" id="55w-1K-clS"/>
                                     <constraint firstItem="T7a-bM-jnh" firstAttribute="leading" secondItem="cOJ-f9-cCS" secondAttribute="leading" id="IbJ-da-JOI"/>
-                                    <constraint firstItem="T7a-bM-jnh" firstAttribute="width" secondItem="cOJ-f9-cCS" secondAttribute="width" multiplier="0.162667" constant="-13.999999999999993" id="fUG-EI-ahV"/>
+                                    <constraint firstItem="T7a-bM-jnh" firstAttribute="width" secondItem="cOJ-f9-cCS" secondAttribute="width" multiplier="0.162667" constant="-2.0534400000000019" id="fUG-EI-ahV"/>
                                     <constraint firstAttribute="bottom" secondItem="hcj-aC-8xq" secondAttribute="bottom" id="in7-EI-k6n"/>
-                                    <constraint firstItem="hcj-aC-8xq" firstAttribute="width" secondItem="cOJ-f9-cCS" secondAttribute="width" multiplier="0.829333" constant="17" id="t6Y-jQ-8JS"/>
+                                    <constraint firstItem="hcj-aC-8xq" firstAttribute="width" secondItem="cOJ-f9-cCS" secondAttribute="width" multiplier="0.829333" constant="1.6134400000000255" id="t6Y-jQ-8JS"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-i9-o3F">
@@ -300,11 +300,12 @@
                     <navigationItem key="navigationItem" id="lSg-Cs-e01"/>
                     <connections>
                         <outlet property="noteTextView" destination="wmk-i9-o3F" id="ybx-Kl-k5w"/>
+                        <outlet property="titleTextField" destination="Sbi-nb-kjG" id="dA6-ah-eRR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3794.4000000000001" y="76.011994002998506"/>
+            <point key="canvasLocation" x="3793.125" y="75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="y11-Uw-y3v">
@@ -363,12 +364,6 @@
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
