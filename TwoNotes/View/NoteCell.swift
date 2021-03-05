@@ -10,8 +10,8 @@ import UIKit
 class NoteCell: UITableViewCell {
     
     @IBOutlet weak var noteTitleLabel: UILabel!
-    @IBOutlet weak var dateImageView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var noteDateImageView: UIImageView!
+    @IBOutlet weak var noteDateLabel: UILabel!
     @IBOutlet weak var noteDetailLabel: UILabel!
     @IBOutlet weak var noteImageView: UIImageView!
     

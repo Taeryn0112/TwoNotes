@@ -99,9 +99,9 @@
                                                     <rect key="frame" x="15" y="50.5" width="20" height="19"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-cY-bc1">
-                                                    <rect key="frame" x="43" y="50" width="36" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/12/21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-cY-bc1">
+                                                    <rect key="frame" x="43" y="50" width="58" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -121,10 +121,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="dateImageView" destination="mXN-Lu-j3M" id="Kuq-he-7sD"/>
-                                            <outlet property="dateLabel" destination="VQ3-cY-bc1" id="Vif-cq-MRL"/>
+                                            <outlet property="noteDateImageView" destination="mXN-Lu-j3M" id="ZTZ-Tl-biL"/>
+                                            <outlet property="noteDateLabel" destination="VQ3-cY-bc1" id="kiJ-En-QsC"/>
                                             <outlet property="noteDetailLabel" destination="rfk-9B-EgR" id="rHv-nw-ow5"/>
-                                            <outlet property="noteImageView" destination="lDB-Hg-XVU" id="ghz-Dq-MiE"/>
+                                            <outlet property="noteImageView" destination="lDB-Hg-XVU" id="4MO-Dk-IhB"/>
                                             <outlet property="noteTitleLabel" destination="5Jt-Z9-FkU" id="zMr-Vd-z34"/>
                                             <segue destination="Cno-fO-Gox" kind="show" identifier="showNote" id="Qgf-ap-kdw"/>
                                         </connections>
@@ -224,8 +224,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EzV-5Q-e7A" userLabel="Date View">
+                                <rect key="frame" x="0.0" y="46" width="375" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday 12:00 P.M." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhC-kZ-Qsx" userLabel="dateLabel">
+                                        <rect key="frame" x="101" y="1.5" width="173" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="rhC-kZ-Qsx" firstAttribute="centerX" secondItem="EzV-5Q-e7A" secondAttribute="centerX" id="2dd-na-4wM"/>
+                                    <constraint firstItem="rhC-kZ-Qsx" firstAttribute="centerY" secondItem="EzV-5Q-e7A" secondAttribute="centerY" id="ViI-GT-tg4"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOJ-f9-cCS" userLabel="TitleMainView">
-                                <rect key="frame" x="0.0" y="44" width="375" height="34"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7a-bM-jnh" userLabel="TitleLabelView">
                                         <rect key="frame" x="0.0" y="0.0" width="59" height="34"/>
@@ -276,7 +292,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wmk-i9-o3F">
-                                <rect key="frame" x="0.0" y="78" width="375" height="589"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -287,12 +303,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="cOJ-f9-cCS" firstAttribute="top" secondItem="4qt-lq-fN1" secondAttribute="top" id="4ah-s6-8b1"/>
+                            <constraint firstItem="cOJ-f9-cCS" firstAttribute="top" secondItem="4qt-lq-fN1" secondAttribute="top" constant="26" id="4ah-s6-8b1"/>
+                            <constraint firstItem="cOJ-f9-cCS" firstAttribute="top" secondItem="EzV-5Q-e7A" secondAttribute="bottom" id="Gvc-O1-y5m"/>
                             <constraint firstItem="4qt-lq-fN1" firstAttribute="trailing" secondItem="cOJ-f9-cCS" secondAttribute="trailing" id="KEZ-1L-eCl"/>
                             <constraint firstItem="cOJ-f9-cCS" firstAttribute="leading" secondItem="4qt-lq-fN1" secondAttribute="leading" id="MRZ-O0-ahZ"/>
+                            <constraint firstItem="EzV-5Q-e7A" firstAttribute="width" secondItem="EZz-Dy-5KH" secondAttribute="width" id="Mc9-I3-h29"/>
+                            <constraint firstItem="EzV-5Q-e7A" firstAttribute="top" secondItem="4qt-lq-fN1" secondAttribute="top" constant="2" id="Oja-jU-Uev"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="bottom" secondItem="4qt-lq-fN1" secondAttribute="bottom" id="P6C-q4-jxk"/>
+                            <constraint firstItem="4qt-lq-fN1" firstAttribute="trailing" secondItem="EzV-5Q-e7A" secondAttribute="trailing" id="TJg-pE-2Km"/>
                             <constraint firstItem="cOJ-f9-cCS" firstAttribute="height" secondItem="EZz-Dy-5KH" secondAttribute="height" multiplier="0.0509745" id="WSC-cI-ax8"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="trailing" secondItem="4qt-lq-fN1" secondAttribute="trailing" id="Xem-Ce-NYN"/>
+                            <constraint firstItem="EzV-5Q-e7A" firstAttribute="leading" secondItem="4qt-lq-fN1" secondAttribute="leading" id="sEL-dW-ckL"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="top" secondItem="cOJ-f9-cCS" secondAttribute="bottom" id="us7-Je-y58"/>
                             <constraint firstItem="wmk-i9-o3F" firstAttribute="leading" secondItem="4qt-lq-fN1" secondAttribute="leading" id="xre-4z-8JY"/>
                         </constraints>
@@ -300,12 +321,13 @@
                     <navigationItem key="navigationItem" id="lSg-Cs-e01"/>
                     <connections>
                         <outlet property="noteTextView" destination="wmk-i9-o3F" id="ybx-Kl-k5w"/>
+                        <outlet property="notesDateLabel" destination="rhC-kZ-Qsx" id="uXG-oI-0SQ"/>
                         <outlet property="titleTextField" destination="Sbi-nb-kjG" id="dA6-ah-eRR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3793.125" y="75"/>
+            <point key="canvasLocation" x="3792.8000000000002" y="74.212893553223395"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="y11-Uw-y3v">
@@ -320,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhe-NS-5TB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4592.8000000000002" y="77.811094452773617"/>
+            <point key="canvasLocation" x="4584.8000000000002" y="73.313343328335833"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="qSy-lu-KHZ">

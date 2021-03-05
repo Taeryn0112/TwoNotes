@@ -9,7 +9,6 @@ import UIKit
 import Foundation
 import RealmSwift
 
-
 public class NotesMainViewController: UIViewController{
     
     var notesViewController: NotesViewController!
@@ -88,7 +87,10 @@ public class NotesMainViewController: UIViewController{
 }
 
 extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
-    
+    struct Time {
+        var hour = Date()
+        var month = Date()
+    }
     //MARK: TableViews
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,8 +100,17 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
+        
+        // Date format ex. 12/22/22
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
+        let dateInString = dateFormatter.string(from: today as Date)
+        
         cell.noteDetailLabel.text = note.userInput
         cell.noteTitleLabel.text = note.noteTitle
+        cell.noteDateLabel.text = dateInString
         cell.detailTextLabel?.text = nil
         return cell
     }
@@ -140,3 +151,4 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
     }
     
 }
+
