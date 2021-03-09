@@ -46,13 +46,12 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         
         // Date format ex. Wednesday 12:00 PM
         
-        let today = Date()
         let dateFormatter = DateFormatter()
-        let weekday = Calendar.current.component(.weekday, from: today)
+        let weekday = Calendar.current.component(.weekday, from: noteObject.date)
         dateFormatter.dateFormat = "h:mm a"
-        let dateInString = dateFormatter.string(from: today as Date)
+        let dateInString = dateFormatter.string(from: noteObject.date as Date)
         notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
-        
+        print(dateInString)
     }
     
     @objc public func doneTapped() {

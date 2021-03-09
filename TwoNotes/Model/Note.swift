@@ -13,7 +13,7 @@ public class Note: Object {
     @objc dynamic var noteTitle: String? = nil
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
-//    @objc dynamic var completed = false
+    @objc dynamic var date: Date! = Date()
     
     
     convenience init(userInput: String?) {
