@@ -35,7 +35,7 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
         
         startObserving(&UserInterfaceStyleManager.shared)
-        
+        noteTextView.delegate = self
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -51,15 +51,28 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         dateFormatter.dateFormat = "h:mm a"
         let dateInString = dateFormatter.string(from: noteObject.date as Date)
         notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
-        print(dateInString)
+        
+        
     }
     
     @objc public func doneTapped() {
         print("done")
         noteTextView.resignFirstResponder()
         titleTextField.resignFirstResponder()
+    
     }
     
+    public func textViewDidChange(_ textView: UITextView) {
+        print("text changed")
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        let weekday = Calendar.current.component(.weekday, from: today)
+        dateFormatter.dateFormat = "h:mm a"
+        let dateInString = dateFormatter.string(from: today as Date)
+        notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
+            
+            
+        }
     
 }
 
