@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-public class NotesViewController: UIViewController, UITextViewDelegate {
+public class NotesViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var notesDateLabel: UILabel!
@@ -36,6 +36,8 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         
         startObserving(&UserInterfaceStyleManager.shared)
         noteTextView.delegate = self
+        titleTextField.delegate = self
+        titleTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -45,13 +47,12 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
         titleTextField.text = noteObject.noteTitle
         
         // Date format ex. Wednesday 12:00 PM
-        
+
         let dateFormatter = DateFormatter()
         let weekday = Calendar.current.component(.weekday, from: noteObject.date)
         dateFormatter.dateFormat = "h:mm a"
         let dateInString = dateFormatter.string(from: noteObject.date as Date)
         notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
-        
         
     }
     
@@ -63,16 +64,34 @@ public class NotesViewController: UIViewController, UITextViewDelegate {
     }
     
     public func textViewDidChange(_ textView: UITextView) {
-        print("text changed")
+        
         let today = Date()
         let dateFormatter = DateFormatter()
         let weekday = Calendar.current.component(.weekday, from: today)
         dateFormatter.dateFormat = "h:mm a"
         let dateInString = dateFormatter.string(from: today as Date)
         notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
-            
-            
+        
+        // Current date needs to be saved in Realm so it can be updated everytime user edits.
+        
+        try! realm.write {
+        noteObject.date = today
+            }
         }
+    
+    @objc public func textFieldDidChange(_ textField: UITextField) {
+         
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        let weekday = Calendar.current.component(.weekday, from: today)
+        dateFormatter.dateFormat = "h:mm a"
+        let dateInString = dateFormatter.string(from: today as Date)
+        notesDateLabel.text = Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
+        
+        try! realm.write {
+        noteObject.date = today
+            }
+    }
     
 }
 
