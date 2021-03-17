@@ -14,7 +14,10 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var notesDateLabel: UILabel!
     var viewModel: NoteDetailViewModel!
-
+    @IBOutlet weak var noteDetailToolBar: UIToolbar!
+    @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var videoBarButtonItem: UIBarButtonItem!
+    
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.viewWillDisappear(noteText: noteTextView.text, titleText: titleTextField.text ?? "")
@@ -29,6 +32,7 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         noteTextView.delegate = self
         titleTextField.delegate = self
         titleTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        cameraBarButtonItem.imageInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0, right: 560)
     }
     
     public override func viewWillAppear(_ animated: Bool) {

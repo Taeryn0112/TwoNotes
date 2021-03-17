@@ -25,7 +25,7 @@ class DateUtils {
         noteDetailDateFormatter.dateFormat = "h:mm a"
         
         // Date format ex. 12/22/22
-        notesListDateFormatter.dateFormat = "MM/dd/yyyy"
+        notesListDateFormatter.dateFormat = "MM/dd/yy"
         notesListDateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
     }
     
@@ -38,7 +38,7 @@ class DateUtils {
     func noteString(from date: Date) -> String {
         let weekday = Calendar.current.component(.weekday, from: date)
         let dateInString = notesListDateFormatter.string(from: date)
-        return Calendar.current.weekdaySymbols[weekday-1] + " \(dateInString)"
+        return dateInString
     }
 
 }
