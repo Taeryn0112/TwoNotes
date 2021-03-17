@@ -216,10 +216,10 @@
             </objects>
             <point key="canvasLocation" x="2887.1999999999998" y="76.911544227886068"/>
         </scene>
-        <!--Notes View Controller-->
+        <!--Note Detail View Controller-->
         <scene sceneID="89N-RN-10O">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Cno-fO-Gox" customClass="NotesViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Cno-fO-Gox" customClass="NoteDetailViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EZz-Dy-5KH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

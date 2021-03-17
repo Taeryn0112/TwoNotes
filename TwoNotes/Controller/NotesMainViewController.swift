@@ -11,7 +11,7 @@ import RealmSwift
 
 public class NotesMainViewController: UIViewController{
     
-    var notesViewController: NotesViewController!
+    var notesViewController: NoteDetailViewController!
     var noteStore: NoteStore!
     @IBOutlet weak var noteTableView: UITableView!
     @IBOutlet weak var addNoteButtonView: UIView!
@@ -61,27 +61,22 @@ public class NotesMainViewController: UIViewController{
         switch segue.identifier {
         case "showNote"?:
             if let row = noteTableView.indexPathForSelectedRow?.row {
-                
                 let notes = noteStore.allNote[row]
-                let notesViewController = segue.destination as! NotesViewController
-                notesViewController.noteObject = notes
+                let notesViewController = segue.destination as! NoteDetailViewController
+                notesViewController.viewModel = NoteDetailViewModel(note: notes)
             }
         case "addNewNote"?:
-            
             let newNote = Note(userInput: "")
             noteStore.storeNote(newNote)
-            
             if let index = noteStore.allNote.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
-                
                 self.noteTableView.insertRows(at: [indexPath], with: .automatic)
-                
             }
-            let notesViewController = segue.destination as! NotesViewController
-                  
-            notesViewController.noteObject = newNote
-            
-        default: preconditionFailure("Unexpected segue identifier")
+
+            let notesViewController = segue.destination as! NoteDetailViewController
+            notesViewController.viewModel = NoteDetailViewModel(note: newNote)
+        default:
+            preconditionFailure("Unexpected segue identifier")
         }
     }
 }
@@ -98,16 +93,9 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
         let note = noteStore.allNote[indexPath.row]
         
-        // Date format ex. 12/22/22
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
-        let dateInString = dateFormatter.string(from: note.date as Date)
-        
         cell.noteDetailLabel.text = note.userInput
         cell.noteTitleLabel.text = note.noteTitle
-        cell.noteDateLabel.text = dateInString
+        cell.noteDateLabel.text = DateUtils.shared.noteString(from: note.date)
         cell.detailTextLabel?.text = nil
         return cell
     }
@@ -144,8 +132,5 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
-        
     }
-    
 }
-
