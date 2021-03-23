@@ -9,15 +9,16 @@ import UIKit
 import RealmSwift
 
 
-public class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+public class NoteDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var notesDateLabel: UILabel!
     var viewModel: NoteDetailViewModel!
     @IBOutlet weak var noteDetailToolBar: UIToolbar!
     @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var videoBarButtonItem: UIBarButtonItem!
+    var image: UIImage?
     
+// MARK: View
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.viewWillDisappear(noteText: noteTextView.text, titleText: titleTextField.text ?? "")
@@ -27,12 +28,13 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        cameraBarButtonItem.imageInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0, right: 560)
         
         startObserving(&UserInterfaceStyleManager.shared)
         noteTextView.delegate = self
         titleTextField.delegate = self
         titleTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        cameraBarButtonItem.imageInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0, right: 560)
+        
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -41,13 +43,8 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         titleTextField.text = viewModel.titleText
         notesDateLabel.text = viewModel.dateText 
     }
-    
-    @objc public func doneTapped() {
-        print("done")
-        noteTextView.resignFirstResponder()
-        titleTextField.resignFirstResponder()
-    }
-    
+
+// MARK: Delegates
     public func textViewDidChange(_ textView: UITextView) {
         let today = Date()
         notesDateLabel.text = DateUtils.shared.string(from: today)
@@ -59,4 +56,49 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         notesDateLabel.text = DateUtils.shared.string(from: today)
         viewModel.textDidChange()
     }
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
+        self.image = image
+        print("\(self.image) image stored")
+        dismiss(animated: true, completion: nil)
+        
+        let attachment = NSTextAttachment()
+        attachment.image = self.image
+        
+        let iconString = NSAttributedString(attachment: attachment)
+        let firstString = NSMutableAttributedString(string: " ")
+        
+        firstString.append(iconString)
+        
+        self.noteTextView.attributedText = iconString
+        
+    }
+    
+// MARK: Methods
+    @objc public func doneTapped() {
+        print("done")
+        noteTextView.resignFirstResponder()
+        titleTextField.resignFirstResponder()
+        }
+    
+    @IBAction func takePicture(_ sender: UIBarButtonItem) {
+        let imagePicker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+        } else {
+            imagePicker.sourceType = .photoLibrary
+        }
+        
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+}
+
+extension NoteDetailViewController {
+    
 }

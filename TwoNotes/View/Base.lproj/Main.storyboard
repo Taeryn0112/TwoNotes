@@ -65,54 +65,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-eH-A13" userLabel="BottomView">
-                                <rect key="frame" x="0.0" y="594" width="375" height="71"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGj-Fc-Pzi" userLabel="AddNoteContainerView">
-                                        <rect key="frame" x="187.5" y="0.0" width="175" height="71"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4la-cX-xEA" userLabel="AddNoteButtonView" customClass="RoundedView" customModule="RoundedViews">
-                                                <rect key="frame" x="120" y="2" width="55" height="55"/>
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="55" id="Ys5-ET-yG2"/>
-                                                    <constraint firstAttribute="width" constant="55" id="q25-KB-Nv5"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
-                                                        <real key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuW-lR-1h3">
-                                                <rect key="frame" x="138.5" y="18.5" width="18" height="22"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="plus" catalog="system"/>
-                                                <connections>
-                                                    <segue destination="Cno-fO-Gox" kind="show" identifier="addNewNote" id="ppK-7f-dla"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="4la-cX-xEA" firstAttribute="centerX" secondItem="TGj-Fc-Pzi" secondAttribute="centerX" constant="60" id="Yxo-Z8-IUf"/>
-                                            <constraint firstItem="vuW-lR-1h3" firstAttribute="centerY" secondItem="4la-cX-xEA" secondAttribute="centerY" id="hts-lQ-Eva"/>
-                                            <constraint firstItem="vuW-lR-1h3" firstAttribute="centerX" secondItem="4la-cX-xEA" secondAttribute="centerX" id="jBa-aZ-T6q"/>
-                                            <constraint firstItem="4la-cX-xEA" firstAttribute="centerY" secondItem="TGj-Fc-Pzi" secondAttribute="centerY" constant="-6" id="pzJ-3v-Whc"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="centerX" secondItem="ezO-eH-A13" secondAttribute="centerX" constant="87.5" id="0QY-wW-nuY"/>
-                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="centerY" secondItem="ezO-eH-A13" secondAttribute="centerY" id="Mze-TN-FKC"/>
-                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="width" secondItem="ezO-eH-A13" secondAttribute="width" multiplier="0.501333" constant="-13.426666666666648" id="WOm-XT-Uvl"/>
-                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="height" secondItem="ezO-eH-A13" secondAttribute="height" id="nne-Em-Xyj"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WXW-3o-g3Q">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -179,6 +131,54 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-eH-A13" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="594" width="375" height="71"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGj-Fc-Pzi" userLabel="AddNoteContainerView">
+                                        <rect key="frame" x="187.5" y="0.0" width="175" height="71"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4la-cX-xEA" userLabel="AddNoteButtonView" customClass="RoundedView" customModule="RoundedViews">
+                                                <rect key="frame" x="120" y="2" width="55" height="55"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="Ys5-ET-yG2"/>
+                                                    <constraint firstAttribute="width" constant="55" id="q25-KB-Nv5"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuW-lR-1h3">
+                                                <rect key="frame" x="138.5" y="18.5" width="18" height="22"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <segue destination="Cno-fO-Gox" kind="show" identifier="addNewNote" id="ppK-7f-dla"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="4la-cX-xEA" firstAttribute="centerX" secondItem="TGj-Fc-Pzi" secondAttribute="centerX" constant="60" id="Yxo-Z8-IUf"/>
+                                            <constraint firstItem="vuW-lR-1h3" firstAttribute="centerY" secondItem="4la-cX-xEA" secondAttribute="centerY" id="hts-lQ-Eva"/>
+                                            <constraint firstItem="vuW-lR-1h3" firstAttribute="centerX" secondItem="4la-cX-xEA" secondAttribute="centerX" id="jBa-aZ-T6q"/>
+                                            <constraint firstItem="4la-cX-xEA" firstAttribute="centerY" secondItem="TGj-Fc-Pzi" secondAttribute="centerY" constant="-6" id="pzJ-3v-Whc"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="centerX" secondItem="ezO-eH-A13" secondAttribute="centerX" constant="87.5" id="0QY-wW-nuY"/>
+                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="centerY" secondItem="ezO-eH-A13" secondAttribute="centerY" id="Mze-TN-FKC"/>
+                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="width" secondItem="ezO-eH-A13" secondAttribute="width" multiplier="0.501333" constant="-13.426666666666648" id="WOm-XT-Uvl"/>
+                                    <constraint firstItem="TGj-Fc-Pzi" firstAttribute="height" secondItem="ezO-eH-A13" secondAttribute="height" id="nne-Em-Xyj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mxo-p6-ZUg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -302,7 +302,11 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <barButtonItem systemItem="camera" id="PLC-OG-wfS"/>
+                                    <barButtonItem systemItem="camera" id="PLC-OG-wfS">
+                                        <connections>
+                                            <action selector="takePicture:" destination="Cno-fO-Gox" id="Xqs-8F-Vgr"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem image="video" catalog="system" id="W0w-zZ-abR"/>
                                 </items>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -334,12 +338,11 @@
                     <tabBarItem key="tabBarItem" title="Item" id="nYX-Ar-h7Y"/>
                     <navigationItem key="navigationItem" id="lSg-Cs-e01"/>
                     <connections>
-                        <outlet property="cameraBarButtonItem" destination="PLC-OG-wfS" id="Boj-Ur-Fnc"/>
+                        <outlet property="cameraBarButtonItem" destination="PLC-OG-wfS" id="lOx-Pn-YdV"/>
                         <outlet property="noteDetailToolBar" destination="90M-tv-WPx" id="oh9-pO-zCI"/>
                         <outlet property="noteTextView" destination="wmk-i9-o3F" id="ybx-Kl-k5w"/>
                         <outlet property="notesDateLabel" destination="rhC-kZ-Qsx" id="uXG-oI-0SQ"/>
                         <outlet property="titleTextField" destination="Sbi-nb-kjG" id="dA6-ah-eRR"/>
-                        <outlet property="videoBarButtonItem" destination="W0w-zZ-abR" id="wFg-Ot-cey"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

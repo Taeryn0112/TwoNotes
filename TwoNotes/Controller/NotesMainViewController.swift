@@ -9,9 +9,9 @@ import UIKit
 import Foundation
 import RealmSwift
 
-public class NotesMainViewController: UIViewController{
+public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate{
     
-    var notesViewController: NoteDetailViewController!
+    var notesDetailViewController: NoteDetailViewController!
     var noteStore: NoteStore!
     @IBOutlet weak var noteTableView: UITableView!
     @IBOutlet weak var addNoteButtonView: UIView!

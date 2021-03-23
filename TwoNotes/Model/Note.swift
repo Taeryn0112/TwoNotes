@@ -15,7 +15,6 @@ public class Note: Object {
     @objc dynamic var orderingValue: Int = 0
     @objc dynamic var date: Date! = Date()
     
-    
     convenience init(userInput: String?) {
         self.init()
         self.userInput = userInput
