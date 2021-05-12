@@ -17,6 +17,12 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
     @IBOutlet weak var noteDetailToolBar: UIToolbar!
     @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
     var image: UIImage?
+    var imagePicker = UIImagePickerController()
+    
+    enum ImageSource {
+            case photoLibrary
+            case camera
+        }
     
 // MARK: View
     public override func viewWillDisappear(_ animated: Bool) {
@@ -59,21 +65,20 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        let attachment = NSTextAttachment()
         
         self.image = image
         print("\(self.image) image stored")
-        dismiss(animated: true, completion: nil)
-        
-        let attachment = NSTextAttachment()
         attachment.image = self.image
         
         let iconString = NSAttributedString(attachment: attachment)
         let firstString = NSMutableAttributedString(string: " ")
-        
+
         firstString.append(iconString)
         
-        self.noteTextView.attributedText = iconString
+        self.noteTextView.attributedText = firstString
         
+        dismiss(animated: true, completion: nil)
     }
     
 // MARK: Methods
@@ -84,21 +89,38 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         }
     
     @IBAction func takePicture(_ sender: UIBarButtonItem) {
-        let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-        } else {
-            imagePicker.sourceType = .photoLibrary
-        }
         
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            imagePicker.sourceType = .camera
+//
+//        } else {
+//            imagePicker.sourceType = .photoLibrary
+//        }
+//
+//        imagePicker.delegate = self
+//
+//        present(imagePicker, animated: true, completion: nil)
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            selectImageFrom(.photoLibrary)
+            return
+        }
+        selectImageFrom(.camera)
+    }
+    
+    func selectImageFrom(_ source: ImageSource) {
+        imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
         present(imagePicker, animated: true, completion: nil)
-        
     }
+    
     
 }
 
-extension NoteDetailViewController {
-    
-}
+

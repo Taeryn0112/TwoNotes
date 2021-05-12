@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let notesController = navController.topViewController as! NotesMainViewController
         notesController.noteStore = noteStore
         
-        
      }
 
     func sceneDidDisconnect(_ scene: UIScene) {

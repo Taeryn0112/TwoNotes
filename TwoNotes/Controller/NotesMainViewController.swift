@@ -9,12 +9,14 @@ import UIKit
 import Foundation
 import RealmSwift
 
-public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate{
+public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate, UISearchBarDelegate{
     
     var notesDetailViewController: NoteDetailViewController!
     var noteStore: NoteStore!
     @IBOutlet weak var noteTableView: UITableView!
     @IBOutlet weak var addNoteButtonView: UIView!
+    @IBOutlet weak var noteSearchBar: UISearchBar!
+    var note: Note!
     
     //MARK: Views
     
@@ -26,6 +28,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         noteTableView.delegate = self
         noteTableView.dataSource = self
         noteTableView.reloadData()
+        noteSearchBar.delegate = self
         
         let leftButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.leftBarButtonItem = leftButton
@@ -64,6 +67,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
                 let notes = noteStore.allNote[row]
                 let notesViewController = segue.destination as! NoteDetailViewController
                 notesViewController.viewModel = NoteDetailViewModel(note: notes)
+                
             }
         case "addNewNote"?:
             let newNote = Note(userInput: "")
@@ -74,6 +78,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
             }
 
             let notesViewController = segue.destination as! NoteDetailViewController
+            
             notesViewController.viewModel = NoteDetailViewModel(note: newNote)
         default:
             preconditionFailure("Unexpected segue identifier")

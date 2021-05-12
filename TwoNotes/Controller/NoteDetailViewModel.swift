@@ -12,7 +12,8 @@ class NoteDetailViewModel  {
     
     var noteObject: Note!
     var realm = SceneDelegate.realm
-
+    var noteDetailVC: NoteDetailViewController!
+    
     init(note: Note) {
         self.noteObject = note
     }

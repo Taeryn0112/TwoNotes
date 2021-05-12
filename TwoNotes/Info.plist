@@ -22,6 +22,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app uses the camera to associate photos with notes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Permission to access user&apos;s photo library</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app uses photo library to associate photos with notes.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
