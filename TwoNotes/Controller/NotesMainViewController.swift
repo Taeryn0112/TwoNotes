@@ -12,11 +12,12 @@ import RealmSwift
 public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate, UISearchBarDelegate{
     
     var notesDetailViewController: NoteDetailViewController!
-    var noteStore: NoteStore!
+    var noteStore = NoteStore()
     @IBOutlet weak var noteTableView: UITableView!
     @IBOutlet weak var addNoteButtonView: UIView!
     @IBOutlet weak var noteSearchBar: UISearchBar!
     var note: Note!
+    var filteredNote: [Note]!
     
     //MARK: Views
     
@@ -27,12 +28,13 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         self.title = "Two Notes"
         noteTableView.delegate = self
         noteTableView.dataSource = self
-        noteTableView.reloadData()
         noteSearchBar.delegate = self
         
         let leftButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.leftBarButtonItem = leftButton
         leftButton.tintColor = UIColor.black
+        
+        filteredNote = noteStore.allNote
         
     }
     
@@ -72,6 +74,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         case "addNewNote"?:
             let newNote = Note(userInput: "")
             noteStore.storeNote(newNote)
+            
             if let index = noteStore.allNote.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 self.noteTableView.insertRows(at: [indexPath], with: .automatic)
@@ -84,19 +87,21 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
             preconditionFailure("Unexpected segue identifier")
         }
     }
+    
+
 }
 
-extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
+extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: TableViews
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return noteStore.allNote.count
+        return filteredNote.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
-        let note = noteStore.allNote[indexPath.row]
+        let note = filteredNote[indexPath.row]
         
         cell.noteDetailLabel.text = note.userInput
         cell.noteTitleLabel.text = note.noteTitle
@@ -135,7 +140,35 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource  {
     }
 
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        self.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
+    }
+    
+    func moveItem(from fromIndex: Int, to toIndex: Int) {
+        if fromIndex == toIndex {
+            return
+        }
+        
+        let originalNote = filteredNote[fromIndex]
+
+        filteredNote.remove(at: fromIndex)
+        filteredNote.insert(originalNote, at: toIndex)
+        
+        noteTableView.reloadData()
+
+    }
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        filteredNote = searchText.isEmpty ? noteStore.allNote : noteStore.allNote.filter { (note: Note) -> Bool in
+            // If dataItem matches the searchText, return true to include it
+            return note.noteTitle?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        noteTableView.reloadData()
     }
 }
