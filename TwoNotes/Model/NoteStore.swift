@@ -20,9 +20,10 @@ import RealmSwift
 public class NoteStore {
     private let realm = try! Realm()
     var allNote = [Note]()
-    
+    var noteMainVC: NotesMainViewController!
     init() {
         self.fetchNotesFromDataBase()
+        
     }
     
     // Load all the notes when the app starts
@@ -45,6 +46,7 @@ public class NoteStore {
         // remove the note from allNotes
         if let index = allNote.firstIndex(of: note) {
             allNote.remove(at: index)
+            
         }
         // update ordering value
         updateOrderingValue()
