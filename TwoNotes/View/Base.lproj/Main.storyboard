@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QiR-KM-Z3O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66z-mX-9Kq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2887.1999999999998" y="76.911544227886068"/>
+            <point key="canvasLocation" x="4765.6000000000004" y="76.911544227886068"/>
         </scene>
         <!--Note Detail View Controller-->
         <scene sceneID="89N-RN-10O">
@@ -353,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOg-vE-sVl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4028" y="77.811094452773617"/>
+            <point key="canvasLocation" x="5772" y="76.911544227886068"/>
         </scene>
         <!--Item-->
         <scene sceneID="y11-Uw-y3v">
@@ -381,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhe-NS-5TB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4988" y="77"/>
+            <point key="canvasLocation" x="6866.3999999999996" y="76.911544227886068"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="qSy-lu-KHZ">
@@ -399,7 +399,155 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBO-DW-OzE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2014" y="78"/>
+            <point key="canvasLocation" x="3892" y="77.811094452773617"/>
+        </scene>
+        <!--Folder View Controller-->
+        <scene sceneID="J9a-Te-BPe">
+            <objects>
+                <viewController id="rQX-zD-B7Y" userLabel="Folder View Controller" customClass="NotesMainViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vie-eJ-MH0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rt9-sl-Pto">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="9LF-2v-ZyD" userLabel="Folder Search Bar">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="43" id="u9A-hw-Qr4" userLabel="FolderCell" customClass="NoteCell" customModule="TwoNotes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u9A-hw-Qr4" id="W5r-K3-Jfb">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gCZ-c4-IKF" userLabel="Folder Image">
+                                                    <rect key="frame" x="16" y="12" width="23" height="17.5"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Folder name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIf-m7-yyj" userLabel="Folder Title Label">
+                                                    <rect key="frame" x="47" y="13" width="301" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="XIf-m7-yyj" secondAttribute="bottom" constant="12" id="40u-wA-NHB"/>
+                                                <constraint firstItem="XIf-m7-yyj" firstAttribute="top" secondItem="W5r-K3-Jfb" secondAttribute="top" constant="13" id="IzR-p8-7dP"/>
+                                                <constraint firstItem="XIf-m7-yyj" firstAttribute="leading" secondItem="gCZ-c4-IKF" secondAttribute="trailing" constant="8" symbolic="YES" id="a3b-Lc-7V1"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XIf-m7-yyj" secondAttribute="trailing" id="cjv-HZ-5ZI"/>
+                                                <constraint firstItem="gCZ-c4-IKF" firstAttribute="leading" secondItem="W5r-K3-Jfb" secondAttribute="leading" constant="16" id="fdZ-ia-k4P"/>
+                                                <constraint firstItem="gCZ-c4-IKF" firstAttribute="top" secondItem="W5r-K3-Jfb" secondAttribute="top" constant="11" id="maU-ch-K9x"/>
+                                                <constraint firstAttribute="bottom" secondItem="gCZ-c4-IKF" secondAttribute="bottom" constant="12" id="z6g-XF-ZAv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="noteDateImageView" destination="gCZ-c4-IKF" id="M3d-Gp-NMA"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EeZ-1h-esT" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="594" width="375" height="71"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdk-42-ZBa" userLabel="AddNoteContainerView">
+                                        <rect key="frame" x="187.5" y="0.0" width="175" height="71"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQ7-CQ-DP5" userLabel="AddNoteButtonView" customClass="RoundedView" customModule="RoundedViews">
+                                                <rect key="frame" x="120" y="2" width="55" height="55"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="55" id="Xxd-QM-A67"/>
+                                                    <constraint firstAttribute="height" constant="55" id="gb1-kr-pKz"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusMultiplier">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzo-py-nyl">
+                                                <rect key="frame" x="135.5" y="18.5" width="24.5" height="22"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="folder.badge.plus" catalog="system"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Vzo-py-nyl" firstAttribute="centerX" secondItem="aQ7-CQ-DP5" secondAttribute="centerX" id="alT-Yr-RTJ"/>
+                                            <constraint firstItem="Vzo-py-nyl" firstAttribute="centerY" secondItem="aQ7-CQ-DP5" secondAttribute="centerY" id="bPt-4h-azD"/>
+                                            <constraint firstItem="aQ7-CQ-DP5" firstAttribute="centerY" secondItem="zdk-42-ZBa" secondAttribute="centerY" constant="-6" id="d9Z-NT-N8M"/>
+                                            <constraint firstItem="aQ7-CQ-DP5" firstAttribute="centerX" secondItem="zdk-42-ZBa" secondAttribute="centerX" constant="60" id="pjV-Ee-eKP"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zdk-42-ZBa" firstAttribute="height" secondItem="EeZ-1h-esT" secondAttribute="height" id="5EP-a8-RrM"/>
+                                    <constraint firstItem="zdk-42-ZBa" firstAttribute="width" secondItem="EeZ-1h-esT" secondAttribute="width" multiplier="0.501333" constant="-13.426666666666648" id="ICs-go-cyB"/>
+                                    <constraint firstItem="zdk-42-ZBa" firstAttribute="centerY" secondItem="EeZ-1h-esT" secondAttribute="centerY" id="Yg0-v6-kzN"/>
+                                    <constraint firstItem="zdk-42-ZBa" firstAttribute="centerX" secondItem="EeZ-1h-esT" secondAttribute="centerX" constant="87.5" id="wb3-ZQ-8DP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ej1-Km-xbg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ej1-Km-xbg" firstAttribute="trailing" secondItem="EeZ-1h-esT" secondAttribute="trailing" id="0ro-Ue-Fn5"/>
+                            <constraint firstItem="Ej1-Km-xbg" firstAttribute="bottom" secondItem="EeZ-1h-esT" secondAttribute="bottom" constant="2" id="0vY-tf-V87"/>
+                            <constraint firstItem="Rt9-sl-Pto" firstAttribute="leading" secondItem="Ej1-Km-xbg" secondAttribute="leading" id="Cus-CD-Glf"/>
+                            <constraint firstItem="EeZ-1h-esT" firstAttribute="leading" secondItem="Ej1-Km-xbg" secondAttribute="leading" id="LY8-LA-Nag"/>
+                            <constraint firstItem="Rt9-sl-Pto" firstAttribute="top" secondItem="Vie-eJ-MH0" secondAttribute="top" constant="44" id="UM1-Wa-YEh"/>
+                            <constraint firstItem="Rt9-sl-Pto" firstAttribute="trailing" secondItem="Ej1-Km-xbg" secondAttribute="trailing" id="lld-0Z-Obd"/>
+                            <constraint firstItem="EeZ-1h-esT" firstAttribute="height" secondItem="Vie-eJ-MH0" secondAttribute="height" multiplier="0.106447" id="qRg-wJ-ZMH"/>
+                            <constraint firstItem="EeZ-1h-esT" firstAttribute="width" secondItem="Vie-eJ-MH0" secondAttribute="width" id="seg-dR-V5s"/>
+                            <constraint firstAttribute="bottom" secondItem="Rt9-sl-Pto" secondAttribute="bottom" id="yAD-Vz-EcH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ppe-40-uge">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="lightbulb" catalog="system" id="WWi-Ky-P6C" userLabel="DarkModeButton">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="bell" catalog="system" id="noV-Sy-CxN" userLabel="NotificationButton">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addNoteButtonView" destination="aQ7-CQ-DP5" id="FPg-rF-SEg"/>
+                        <outlet property="noteSearchBar" destination="9LF-2v-ZyD" id="Rcm-aL-LWR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wWa-y3-Gaa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3064.8000000000002" y="76.911544227886068"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SIN-WG-0Ie">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mgr-bV-oxh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5oK-jG-KNK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rQX-zD-B7Y" kind="relationship" relationship="rootViewController" id="kiU-St-6un"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEB-cH-gAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2125.5999999999999" y="76.911544227886068"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -408,6 +556,8 @@
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="folder" catalog="system" width="128" height="97"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="lightbulb" catalog="system" width="113" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="mic" catalog="system" width="108" height="128"/>
