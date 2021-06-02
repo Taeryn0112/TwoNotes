@@ -404,7 +404,7 @@
         <!--Folder View Controller-->
         <scene sceneID="J9a-Te-BPe">
             <objects>
-                <viewController id="rQX-zD-B7Y" userLabel="Folder View Controller" customClass="NotesMainViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rQX-zD-B7Y" userLabel="Folder View Controller" customClass="FolderViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vie-eJ-MH0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -418,7 +418,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="43" id="u9A-hw-Qr4" userLabel="FolderCell" customClass="NoteCell" customModule="TwoNotes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="43" id="u9A-hw-Qr4" userLabel="FolderCell" customClass="FolderCell" customModule="TwoNotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u9A-hw-Qr4" id="W5r-K3-Jfb">
@@ -429,8 +429,8 @@
                                                     <rect key="frame" x="16" y="12" width="23" height="17.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Folder name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIf-m7-yyj" userLabel="Folder Title Label">
-                                                    <rect key="frame" x="47" y="13" width="301" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folder name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIf-m7-yyj" userLabel="Folder Title Label">
+                                                    <rect key="frame" x="47" y="13" width="87.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -447,7 +447,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="noteDateImageView" destination="gCZ-c4-IKF" id="M3d-Gp-NMA"/>
+                                            <outlet property="folderImageView" destination="gCZ-c4-IKF" id="kms-En-yLp"/>
+                                            <outlet property="folderTitleLabel" destination="XIf-m7-yyj" id="xNr-6O-iBF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -455,10 +456,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EeZ-1h-esT" userLabel="BottomView">
                                 <rect key="frame" x="0.0" y="594" width="375" height="71"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdk-42-ZBa" userLabel="AddNoteContainerView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdk-42-ZBa" userLabel="AddFolderContainerView">
                                         <rect key="frame" x="187.5" y="0.0" width="175" height="71"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQ7-CQ-DP5" userLabel="AddNoteButtonView" customClass="RoundedView" customModule="RoundedViews">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQ7-CQ-DP5" userLabel="AddFolderButtonView" customClass="RoundedView" customModule="RoundedViews">
                                                 <rect key="frame" x="120" y="2" width="55" height="55"/>
                                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
@@ -523,13 +524,14 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="addNoteButtonView" destination="aQ7-CQ-DP5" id="FPg-rF-SEg"/>
-                        <outlet property="noteSearchBar" destination="9LF-2v-ZyD" id="Rcm-aL-LWR"/>
+                        <outlet property="FolderSearchBar" destination="9LF-2v-ZyD" id="JjI-7U-GoY"/>
+                        <outlet property="addFolderButtonView" destination="aQ7-CQ-DP5" id="xN8-Vn-3H9"/>
+                        <outlet property="folderTableView" destination="Rt9-sl-Pto" id="SuU-Er-9gu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWa-y3-Gaa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3064.8000000000002" y="76.911544227886068"/>
+            <point key="canvasLocation" x="3033" y="77"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SIN-WG-0Ie">
@@ -547,7 +549,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEB-cH-gAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2125.5999999999999" y="76.911544227886068"/>
+            <point key="canvasLocation" x="2140" y="77"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

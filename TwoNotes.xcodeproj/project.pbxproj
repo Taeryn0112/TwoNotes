@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6B05758A3B245279FEAB4D29 /* Pods_TwoNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9D12EF5C63399D1981D072 /* Pods_TwoNotes.framework */; };
+		E93B759A2666AE1E00458B99 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75992666AE1E00458B99 /* FolderViewController.swift */; };
+		E93B75A22666B01000458B99 /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75A12666B01000458B99 /* FolderCell.swift */; };
 		E95129132579A22D00E6552C /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95129122579A22D00E6552C /* NoteStore.swift */; };
 		E954B5DC257C749200221416 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954B5DB257C749200221416 /* NoteCell.swift */; };
 		E95A763026018B5200E609DC /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A762F26018B5200E609DC /* DateUtils.swift */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		1CAF48FC220E16C977B2413E /* Pods-TwoNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.release.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.release.xcconfig"; sourceTree = "<group>"; };
 		6D4DC040A698B4A5F1BF0DDE /* Pods-TwoNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwoNotes.debug.xcconfig"; path = "Target Support Files/Pods-TwoNotes/Pods-TwoNotes.debug.xcconfig"; sourceTree = "<group>"; };
+		E93B75992666AE1E00458B99 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		E93B75A12666B01000458B99 /* FolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
 		E95129122579A22D00E6552C /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		E954B5DB257C749200221416 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		E95A762F26018B5200E609DC /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				E954B5DB257C749200221416 /* NoteCell.swift */,
+				E93B75A12666B01000458B99 /* FolderCell.swift */,
 				E97FC3F725775CD0002CBC08 /* Main.storyboard */,
 				E974F73025CD23E900D1964C /* TwoNotes-Bridging-Header.h */,
 				E974F73125CD23EF00D1964C /* NSObject+Method.h */,
@@ -222,6 +227,7 @@
 		E990300F257860EF00EB09AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E93B75992666AE1E00458B99 /* FolderViewController.swift */,
 				E9903008257860A500EB09AC /* NotesMainViewController.swift */,
 				E99030182578774C00EB09AC /* NoteDetailViewController.swift */,
 				E95A764526018FE200E609DC /* NoteDetailViewModel.swift */,
@@ -413,10 +419,12 @@
 				E967402D25AC1789005A2D59 /* SettingsViewController.swift in Sources */,
 				E99030192578774C00EB09AC /* NoteDetailViewController.swift in Sources */,
 				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
+				E93B75A22666B01000458B99 /* FolderCell.swift in Sources */,
 				E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */,
 				E95129132579A22D00E6552C /* NoteStore.swift in Sources */,
 				E9903009257860A500EB09AC /* NotesMainViewController.swift in Sources */,
 				E954B5DC257C749200221416 /* NoteCell.swift in Sources */,
+				E93B759A2666AE1E00458B99 /* FolderViewController.swift in Sources */,
 				E95A764626018FE200E609DC /* NoteDetailViewModel.swift in Sources */,
 				E967402525AC1303005A2D59 /* UserInterfaceStyleManager.swift in Sources */,
 				E99030142578664900EB09AC /* Note.swift in Sources */,

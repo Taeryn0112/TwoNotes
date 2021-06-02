@@ -21,6 +21,7 @@ public class NoteStore {
     private let realm = try! Realm()
     var allNote = [Note]()
     var noteMainVC: NotesMainViewController!
+    
     init() {
         self.fetchNotesFromDataBase()
         
