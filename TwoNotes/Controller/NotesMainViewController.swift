@@ -63,7 +63,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showNote"?:
+        case "showNoteContent"?:
             if let row = noteTableView.indexPathForSelectedRow?.row {
                 let notes = self.filteredNote[row]
                 let notesViewController = segue.destination as! NoteDetailViewController

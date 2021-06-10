@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mgr-bV-oxh">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -55,7 +55,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="db7-Qq-JOp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2014" y="788"/>
+            <point key="canvasLocation" x="2140" y="776"/>
         </scene>
         <!--Notes Main View Controller-->
         <scene sceneID="89X-AS-rtX">
@@ -131,7 +131,7 @@
                                             <outlet property="noteDetailLabel" destination="rfk-9B-EgR" id="rHv-nw-ow5"/>
                                             <outlet property="noteImageView" destination="lDB-Hg-XVU" id="4MO-Dk-IhB"/>
                                             <outlet property="noteTitleLabel" destination="5Jt-Z9-FkU" id="zMr-Vd-z34"/>
-                                            <segue destination="Cno-fO-Gox" kind="show" identifier="showNote" id="VSo-gu-fJk"/>
+                                            <segue destination="Cno-fO-Gox" kind="show" identifier="showNoteContent" id="VSo-gu-fJk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -200,9 +200,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="edJ-tO-VLv">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="gsY-XM-JoV" userLabel="SearchButton">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="lightbulb" catalog="system" id="95m-pr-1tp" userLabel="DarkModeButton">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -399,7 +396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBO-DW-OzE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3892" y="77.811094452773617"/>
+            <point key="canvasLocation" x="3854" y="474"/>
         </scene>
         <!--Folder View Controller-->
         <scene sceneID="J9a-Te-BPe">
@@ -418,7 +415,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="43" id="u9A-hw-Qr4" userLabel="FolderCell" customClass="FolderCell" customModule="TwoNotes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FolderCell" rowHeight="43" id="u9A-hw-Qr4" userLabel="FolderCell" customClass="FolderCell" customModule="TwoNotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u9A-hw-Qr4" id="W5r-K3-Jfb">
@@ -449,6 +446,7 @@
                                         <connections>
                                             <outlet property="folderImageView" destination="gCZ-c4-IKF" id="kms-En-yLp"/>
                                             <outlet property="folderTitleLabel" destination="XIf-m7-yyj" id="xNr-6O-iBF"/>
+                                            <segue destination="6k4-cB-vhy" kind="show" identifier="showNotes" id="M5y-Fo-Pre"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -479,6 +477,9 @@
                                                 <rect key="frame" x="135.5" y="18.5" width="24.5" height="22"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="folder.badge.plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="addNewFolder:" destination="rQX-zD-B7Y" eventType="touchUpInside" id="Sct-N7-d2i"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -524,8 +525,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="FolderSearchBar" destination="9LF-2v-ZyD" id="JjI-7U-GoY"/>
-                        <outlet property="addFolderButtonView" destination="aQ7-CQ-DP5" id="xN8-Vn-3H9"/>
+                        <outlet property="folderSearchBar" destination="9LF-2v-ZyD" id="9kb-uw-Uv6"/>
                         <outlet property="folderTableView" destination="Rt9-sl-Pto" id="SuU-Er-9gu"/>
                     </connections>
                 </viewController>
@@ -533,10 +533,10 @@
             </objects>
             <point key="canvasLocation" x="3033" y="77"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Folder Navigation View Controller-->
         <scene sceneID="SIN-WG-0Ie">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mgr-bV-oxh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mgr-bV-oxh" customClass="FolderNavigationViewController" customModule="TwoNotes" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5oK-jG-KNK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -553,7 +553,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VSo-gu-fJk"/>
+        <segue reference="ppK-7f-dla"/>
+        <segue reference="M5y-Fo-Pre"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
@@ -561,7 +562,6 @@
         <image name="folder" catalog="system" width="128" height="97"/>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="lightbulb" catalog="system" width="113" height="128"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="mic" catalog="system" width="108" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="video" catalog="system" width="128" height="83"/>

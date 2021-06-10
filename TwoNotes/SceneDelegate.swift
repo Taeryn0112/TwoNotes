@@ -17,9 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let noteStore = NoteStore()
         
-        let navController = window?.rootViewController as! NavigationViewController
-        let notesController = navController.topViewController as! NotesMainViewController
-        notesController.noteStore = noteStore
+        let navController = window?.rootViewController as! FolderNavigationViewController
+//        let notesController = navController.topViewController as! NotesMainViewController
+//        notesController.noteStore = noteStore
+        
+        let notesController = navController.topViewController as! FolderViewController
         
      }
 
