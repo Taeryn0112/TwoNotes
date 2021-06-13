@@ -21,6 +21,7 @@
 		E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402325AC1302005A2D59 /* WeakStyleObserver.swift */; };
 		E967402725AC1303005A2D59 /* UserInterfaceStyleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402425AC1303005A2D59 /* UserInterfaceStyleObserver.swift */; };
 		E967402D25AC1789005A2D59 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E967402C25AC1789005A2D59 /* SettingsViewController.swift */; };
+		E978C83E26757FBF0072C6EC /* FolderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E978C83D26757FBF0072C6EC /* FolderStore.swift */; };
 		E97FC3F225775CD0002CBC08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F125775CD0002CBC08 /* AppDelegate.swift */; };
 		E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */; };
 		E97FC3F925775CD0002CBC08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97FC3F725775CD0002CBC08 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		E9903009257860A500EB09AC /* NotesMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9903008257860A500EB09AC /* NotesMainViewController.swift */; };
 		E99030142578664900EB09AC /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030132578664900EB09AC /* Note.swift */; };
 		E99030192578774C00EB09AC /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030182578774C00EB09AC /* NoteDetailViewController.swift */; };
+		E9B2C5F32672DCC70057BB86 /* FolderDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B2C5F22672DCC70057BB86 /* FolderDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 		E974F73025CD23E900D1964C /* TwoNotes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TwoNotes-Bridging-Header.h"; sourceTree = "<group>"; };
 		E974F73125CD23EF00D1964C /* NSObject+Method.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Method.h"; sourceTree = "<group>"; };
 		E974F73225CD23F500D1964C /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		E978C83D26757FBF0072C6EC /* FolderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderStore.swift; sourceTree = "<group>"; };
 		E97FC3EE25775CD0002CBC08 /* TwoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97FC3F125775CD0002CBC08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97FC3F325775CD0002CBC08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		E9903008257860A500EB09AC /* NotesMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesMainViewController.swift; sourceTree = "<group>"; };
 		E99030132578664900EB09AC /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E99030182578774C00EB09AC /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		E9B2C5F22672DCC70057BB86 /* FolderDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewModel.swift; sourceTree = "<group>"; };
 		FD9D12EF5C63399D1981D072 /* Pods_TwoNotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoNotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -211,6 +215,7 @@
 			children = (
 				E903E01A266FFA4A00726804 /* Folder.swift */,
 				E99030132578664900EB09AC /* Note.swift */,
+				E978C83D26757FBF0072C6EC /* FolderStore.swift */,
 				E95129122579A22D00E6552C /* NoteStore.swift */,
 			);
 			path = Model;
@@ -236,6 +241,7 @@
 				E9903008257860A500EB09AC /* NotesMainViewController.swift */,
 				E99030182578774C00EB09AC /* NoteDetailViewController.swift */,
 				E95A764526018FE200E609DC /* NoteDetailViewModel.swift */,
+				E9B2C5F22672DCC70057BB86 /* FolderDetailViewModel.swift */,
 				E903E02226706C1100726804 /* FolderNavigationViewController.swift */,
 				E9633A7C25AD2B1100B77037 /* NavigationViewController.swift */,
 				E967402C25AC1789005A2D59 /* SettingsViewController.swift */,
@@ -427,6 +433,7 @@
 				E99030192578774C00EB09AC /* NoteDetailViewController.swift in Sources */,
 				E97FC3F425775CD0002CBC08 /* SceneDelegate.swift in Sources */,
 				E93B75A22666B01000458B99 /* FolderCell.swift in Sources */,
+				E978C83E26757FBF0072C6EC /* FolderStore.swift in Sources */,
 				E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */,
 				E95129132579A22D00E6552C /* NoteStore.swift in Sources */,
 				E9903009257860A500EB09AC /* NotesMainViewController.swift in Sources */,
@@ -435,6 +442,7 @@
 				E903E02326706C1100726804 /* FolderNavigationViewController.swift in Sources */,
 				E95A764626018FE200E609DC /* NoteDetailViewModel.swift in Sources */,
 				E967402525AC1303005A2D59 /* UserInterfaceStyleManager.swift in Sources */,
+				E9B2C5F32672DCC70057BB86 /* FolderDetailViewModel.swift in Sources */,
 				E99030142578664900EB09AC /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

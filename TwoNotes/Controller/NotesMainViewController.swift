@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import RealmSwift
 
-public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate, UISearchBarDelegate{
+public class NotesMainViewController: UIViewController, UIImagePickerControllerDelegate, UISearchBarDelegate {
     
     var notesDetailViewController: NoteDetailViewController!
     var noteStore = NoteStore()
@@ -31,20 +31,22 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         noteTableView.dataSource = self
         noteSearchBar.delegate = self
         
-        let leftButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
-        self.navigationItem.leftBarButtonItem = leftButton
-        leftButton.tintColor = UIColor.black
+        let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
+        self.navigationItem.rightBarButtonItem = rightButton
+        rightButton.tintColor = UIColor.black
         
         filteredNote = noteStore.allNote
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        filteredNote = noteStore.allNote
         noteTableView.reloadData()
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         noteTableView.reloadData()
     }
     
@@ -84,6 +86,8 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
             let notesViewController = segue.destination as! NoteDetailViewController
             
             notesViewController.viewModel = NoteDetailViewModel(note: newNote)
+            self.noteTableView.reloadData()
+            
         default:
             preconditionFailure("Unexpected segue identifier")
         }
@@ -132,7 +136,6 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
                 self.deleteNote(note)
                 self.noteTableView.deleteRows(at: [indexPath], with: .automatic)
                 
-                
             })
             ac.addAction(deleteAction)
             
@@ -146,7 +149,6 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
         if let index = filteredNote.firstIndex(of: note) {
             filteredNote.remove(at: index)
         }
-        
     }
     
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

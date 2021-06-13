@@ -20,21 +20,17 @@ import RealmSwift
 public class NoteStore {
     private let realm = try! Realm()
     var allNote = [Note]()
-    var noteMainVC: NotesMainViewController!
-    var folderTitle: String!
     
     init() {
         self.fetchNotesFromDataBase()
-        
     }
     
     // Load all the notes when the app starts
-    func fetchNotesFromDataBase() {
+    private func fetchNotesFromDataBase() {
         let notes = Array(realm.objects(Note.self).sorted(byKeyPath: "orderingValue", ascending: true))
         self.allNote = notes
-        
     }
-    
+
     private func save(_ note: Note) {
         try! realm.write {
             realm.add(note)
@@ -60,7 +56,6 @@ public class NoteStore {
         updateOrderingValue()
     }
     
-    
     func moveItem(from fromIndex: Int, to toIndex: Int) {
         if fromIndex == toIndex {
             return
@@ -72,7 +67,6 @@ public class NoteStore {
         allNote.insert(originalNote, at: toIndex)
         
         updateOrderingValue()
-
     }
     
     private func updateOrderingValue() {
@@ -86,4 +80,5 @@ public class NoteStore {
         }
      }
   }
+    
 }

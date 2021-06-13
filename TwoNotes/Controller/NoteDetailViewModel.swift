@@ -8,11 +8,10 @@
 import Foundation
 import RealmSwift
 
-class NoteDetailViewModel  {
+class NoteDetailViewModel {
     
     var noteObject: Note!
     var realm = SceneDelegate.realm
-    var noteDetailVC: NoteDetailViewController!
     
     init(note: Note) {
         self.noteObject = note
@@ -29,7 +28,7 @@ class NoteDetailViewModel  {
     var dateText: String {
         return DateUtils.shared.string(from: noteObject.date)
     }
-    
+     
     func viewWillDisappear(noteText: String, titleText: String) {
         guard realm.object(ofType: Note.self, forPrimaryKey: noteObject.serialNumber) != nil else { return }
         try! realm.write {

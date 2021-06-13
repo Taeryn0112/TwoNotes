@@ -16,13 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let noteStore = NoteStore()
+        let folderStore = FolderStore()
         
         let navController = window?.rootViewController as! FolderNavigationViewController
+        let folderController = navController.topViewController as! FolderViewController
+        folderController.folderStore = folderStore
+        
 //        let notesController = navController.topViewController as! NotesMainViewController
 //        notesController.noteStore = noteStore
-        
-        let notesController = navController.topViewController as! FolderViewController
-        
      }
 
     func sceneDidDisconnect(_ scene: UIScene) {
