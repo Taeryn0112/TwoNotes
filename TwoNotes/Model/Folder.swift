@@ -10,18 +10,19 @@ import RealmSwift
 
 class Folder: Object {
     
-    @objc dynamic var folderTitle: String!
+    @objc dynamic var folderTitle: String! = nil
     // var notes: [Note]
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
-//    let note = List<Note>()
+    let note = List<Note>()
     
-    override init() {
-        self.folderTitle = ""
-//        self.notes = []
-    }
+//    override init() {
+//        self.folderTitle = ""
+////        self.notes = []
+//    }
     
-    init(folderName folderTitle: String) {
+    convenience init(folderName folderTitle: String) {
+        self.init()
         self.folderTitle = folderTitle
 //        self.notes = []
     }

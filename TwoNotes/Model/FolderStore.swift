@@ -11,7 +11,6 @@ import RealmSwift
 public class FolderStore {
     private let realm = try! Realm()
     var allFolder = [Folder]()
-    var folderTitle: String!
     
     init() {
         self.fetchFoldersFromDataBase()

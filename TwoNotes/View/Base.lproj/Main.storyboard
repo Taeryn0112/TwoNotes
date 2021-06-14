@@ -446,7 +446,7 @@
                                         <connections>
                                             <outlet property="folderImageView" destination="gCZ-c4-IKF" id="kms-En-yLp"/>
                                             <outlet property="folderTitleLabel" destination="XIf-m7-yyj" id="xNr-6O-iBF"/>
-                                            <segue destination="6k4-cB-vhy" kind="show" identifier="showFolder" id="M5y-Fo-Pre"/>
+                                            <segue destination="6k4-cB-vhy" kind="show" identifier="showFolderContent" id="M5y-Fo-Pre"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

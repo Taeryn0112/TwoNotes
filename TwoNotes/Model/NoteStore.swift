@@ -73,9 +73,9 @@ public class NoteStore {
         // for all the items in the allNotes array
         // update the orderingValue to the index in the array
         try! realm.write {
-        for note in allNote {
-            if let index = allNote.firstIndex(of: note) {
-                note.orderingValue = index
+            for note in allNote {
+                if let index = allNote.firstIndex(of: note) {
+                    note.orderingValue = index
             }
         }
      }

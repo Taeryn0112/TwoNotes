@@ -16,7 +16,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
 //  var folderArray = [Folder]()
     var viewModel: FolderDetailViewModel!
     var realm = SceneDelegate.realm
-//    let folder = Folder()
+    //    let folder = Folder()
     var folderStore = FolderStore()
     
     public override func viewDidLoad() {
@@ -36,7 +36,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("ViewModel.folderTitleText: \(viewModel.folderTitleText)")
+        
         folderTableView.reloadData()
     }
     
@@ -93,10 +93,11 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showFolder"?:
+        case "showFolderContent"?:
             if let row = folderTableView.indexPathForSelectedRow?.row {
                 let folder = self.folderStore.allFolder[row]
-                self.viewModel = FolderDetailViewModel(folder: folder)
+                let notesMainViewController = segue.destination as! NotesMainViewController
+                notesMainViewController.viewModel = FolderDetailViewModel(folder: folder)
             }
 
         default:
@@ -161,7 +162,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
+//        self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         folderStore.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
     }

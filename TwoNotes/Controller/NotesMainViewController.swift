@@ -18,6 +18,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
     @IBOutlet weak var noteSearchBar: UISearchBar!
     var note: Note!
     var filteredNote: [Note]!
+    var viewModel: FolderDetailViewModel!
     
     
     //MARK: Views
@@ -46,7 +47,6 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
     
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         noteTableView.reloadData()
     }
     
