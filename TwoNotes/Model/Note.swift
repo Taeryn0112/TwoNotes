@@ -14,6 +14,8 @@ public class Note: Object {
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
     @objc dynamic var date: Date! = Date()
+    @objc dynamic var folderSerialNumber: ObjectId!
+    @objc dynamic var note: Note!
     
     convenience init(userInput: String?) {
         self.init()

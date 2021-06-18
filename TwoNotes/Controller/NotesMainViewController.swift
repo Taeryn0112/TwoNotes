@@ -19,15 +19,14 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
     var note: Note!
     var filteredNote: [Note]!
     var viewModel: FolderDetailViewModel!
-    
-    
+    var folder: Folder!
     //MARK: Views
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         startObserving(&UserInterfaceStyleManager.shared)
-        self.title = "Two Notes"
+        self.title = viewModel.folderTitleText
         noteTableView.delegate = self
         noteTableView.dataSource = self
         noteSearchBar.delegate = self
@@ -37,16 +36,21 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         rightButton.tintColor = UIColor.black
         
         filteredNote = noteStore.allNote
-    }
+        viewModel.viewDidLoad()
+        noteTableView.reloadData()
+        }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filteredNote = noteStore.allNote
+        
         noteTableView.reloadData()
+       
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         noteTableView.reloadData()
     }
     
@@ -61,23 +65,26 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         }
     }
     
+
     //MARK: Segue
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showNoteContent"?:
             if let row = noteTableView.indexPathForSelectedRow?.row {
-                let notes = self.filteredNote[row]
+                let notes = self.viewModel.noteArray[row]
                 let notesViewController = segue.destination as! NoteDetailViewController
                 notesViewController.viewModel = NoteDetailViewModel(note: notes)
                 
+                self.noteTableView.reloadData()
             }
         case "addNewNote"?:
             let newNote = Note(userInput: "")
+            newNote.folderSerialNumber = viewModel.folderObject.serialNumber
             noteStore.storeNote(newNote)
-            self.filteredNote.append(newNote)
+            self.viewModel.noteArray.insert(newNote, at: 0)
             
-            if let index = filteredNote.firstIndex(of: newNote) {
+            if let index = viewModel.noteArray.firstIndex(of: newNote) {
                 let indexPath = IndexPath(row: index, section: 0)
                 self.noteTableView.insertRows(at: [indexPath], with: .automatic)
                 
@@ -87,6 +94,7 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
             
             notesViewController.viewModel = NoteDetailViewModel(note: newNote)
             self.noteTableView.reloadData()
+            
             
         default:
             preconditionFailure("Unexpected segue identifier")
@@ -99,12 +107,13 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: TableViews
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredNote.count
+        return viewModel.noteArray.count
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
-        let note = filteredNote[indexPath.row]
+        let note = viewModel.noteArray[indexPath.row]
         
         cell.noteDetailLabel.text = note.userInput
         cell.noteTitleLabel.text = note.noteTitle
@@ -121,7 +130,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             let notes = noteStore.allNote[indexPath.row]
-            let note = filteredNote[indexPath.row]
+            let note = viewModel.noteArray[indexPath.row]
             let title = "Delete \(notes.userInput ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -132,7 +141,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-                self.noteStore.deleteNote(note)
+                self.noteStore.deleteNote(notes)
                 self.deleteNote(note)
                 self.noteTableView.deleteRows(at: [indexPath], with: .automatic)
                 
@@ -146,14 +155,15 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
 
     public func deleteNote(_ note: Note) {
         
-        if let index = filteredNote.firstIndex(of: note) {
-            filteredNote.remove(at: index)
+        if let index = viewModel.noteArray.firstIndex(of: note) {
+            viewModel.noteArray.remove(at: index)
         }
     }
     
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        self.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        
         noteStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        self.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
     }
     
@@ -162,10 +172,10 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let originalNote = filteredNote[fromIndex]
+        let originalNote = viewModel.noteArray[fromIndex]
 
-        filteredNote.remove(at: fromIndex)
-        filteredNote.insert(originalNote, at: toIndex)
+        viewModel.noteArray.remove(at: fromIndex)
+        viewModel.noteArray.insert(originalNote, at: toIndex)
         
         noteTableView.reloadData()
 
@@ -177,7 +187,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
         // Use the filter method to iterate over all items in the data array
         // For each item, return true if the item should be included and false if the
         // item should NOT be included
-        filteredNote = searchText.isEmpty ? noteStore.allNote : noteStore.allNote.filter { (note: Note) -> Bool in
+        viewModel.noteArray = searchText.isEmpty ? noteStore.allNote : noteStore.allNote.filter { (note: Note) -> Bool in
             // If dataItem matches the searchText, return true to include it
             return note.noteTitle?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || note.userInput?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }

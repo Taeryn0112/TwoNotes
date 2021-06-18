@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import RealmSwift
 
 class FolderViewController: UIViewController, UISearchBarDelegate {
     
@@ -18,6 +19,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     var realm = SceneDelegate.realm
     //    let folder = Folder()
     var folderStore = FolderStore()
+    var folders: Results<Folder>!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
             self.navigationItem.leftBarButtonItem?.title = "Done"
         }
     }
+    
     
     @IBAction func addNewFolder(_ sender: UIButton) {
         let title = "New Folder"
@@ -97,14 +100,17 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
             if let row = folderTableView.indexPathForSelectedRow?.row {
                 let folder = self.folderStore.allFolder[row]
                 let notesMainViewController = segue.destination as! NotesMainViewController
-                notesMainViewController.viewModel = FolderDetailViewModel(folder: folder)
+                // Create a FolderDetailViewModel instance and set it to local variable called viewModel
+                let viewModel =  FolderDetailViewModel(folder: folder)
+                notesMainViewController.viewModel = viewModel
+                
+                print("serial number: \(folder.serialNumber)")
             }
 
         default:
             preconditionFailure("Unexpected segue identifier")
         }
     }
-    
 }
 
 extension FolderViewController : UITableViewDelegate, UITableViewDataSource {

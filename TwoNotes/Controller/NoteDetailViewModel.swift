@@ -28,6 +28,10 @@ class NoteDetailViewModel {
     var dateText: String {
         return DateUtils.shared.string(from: noteObject.date)
     }
+    
+    var noteFolderSerialNumber: ObjectId {
+        return noteObject.folderSerialNumber
+    }
      
     func viewWillDisappear(noteText: String, titleText: String) {
         guard realm.object(ofType: Note.self, forPrimaryKey: noteObject.serialNumber) != nil else { return }

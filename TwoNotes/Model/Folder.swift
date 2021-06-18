@@ -14,7 +14,7 @@ class Folder: Object {
     // var notes: [Note]
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
-    let note = List<Note>()
+    let notes = List<Note>()
     
 //    override init() {
 //        self.folderTitle = ""

@@ -29,6 +29,7 @@ public class NoteDetailViewController: UIViewController, UITextViewDelegate, UIT
         super.viewWillDisappear(animated)
         viewModel.viewWillDisappear(noteText: noteTextView.text, titleText: titleTextField.text ?? "")
         
+        
     }
     
     public override func viewDidLoad() {
