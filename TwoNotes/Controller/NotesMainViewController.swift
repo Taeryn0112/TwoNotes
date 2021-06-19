@@ -35,14 +35,13 @@ public class NotesMainViewController: UIViewController, UIImagePickerControllerD
         self.navigationItem.rightBarButtonItem = rightButton
         rightButton.tintColor = UIColor.black
         
-        filteredNote = noteStore.allNote
         viewModel.viewDidLoad()
         noteTableView.reloadData()
         }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        filteredNote = noteStore.allNote
+        filteredNote = viewModel.noteArray
         
         noteTableView.reloadData()
        
@@ -108,7 +107,6 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.noteArray.count
-        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,11 +119,7 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = nil
         return cell
     }
-    
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+        
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
@@ -187,11 +181,23 @@ extension NotesMainViewController: UITableViewDelegate, UITableViewDataSource {
         // Use the filter method to iterate over all items in the data array
         // For each item, return true if the item should be included and false if the
         // item should NOT be included
-        viewModel.noteArray = searchText.isEmpty ? noteStore.allNote : noteStore.allNote.filter { (note: Note) -> Bool in
-            // If dataItem matches the searchText, return true to include it
-            return note.noteTitle?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || note.userInput?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-        }
         
-        noteTableView.reloadData()
+        if searchText.isEmpty {
+//          If search text is empty,
+//          grab the original unfiltered viewModel.noteArray
+//          and display it on the noteTableView.
+            let sortedArray = Array(viewModel.sortedArray)
+            viewModel.noteArray = sortedArray
+            noteTableView.reloadData()
+        } else {
+            // Else search text is not empty
+            // filter notes based on search user input
+            // and display it on the noteTableView.
+            viewModel.noteArray = viewModel.noteArray.filter { (note: Note) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return note.noteTitle?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || note.userInput?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            noteTableView.reloadData()
+        }
     }
 }

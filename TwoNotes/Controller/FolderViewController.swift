@@ -14,25 +14,29 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     var notesMainViewController: NotesMainViewController!
     @IBOutlet weak var folderSearchBar: UISearchBar!
     @IBOutlet weak var folderTableView: UITableView!
-//  var folderArray = [Folder]()
+
     var viewModel: FolderDetailViewModel!
     var realm = SceneDelegate.realm
     //    let folder = Folder()
     var folderStore = FolderStore()
     var folders: Results<Folder>!
+    var filteredFolder = [Folder]()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         folderTableView.delegate = self
         folderTableView.dataSource = self
+        folderSearchBar.delegate = self
         
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.rightBarButtonItem = rightButton
         rightButton.tintColor = UIColor.black
+        
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        filteredFolder = folderStore.allFolder
         folderTableView.reloadData()
     }
     
@@ -74,8 +78,9 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
             
                 // Add to folder array
                 self.folderStore.storeFolder(folder)
+                self.filteredFolder = self.folderStore.allFolder
                 
-                if let index = self.folderStore.allFolder.firstIndex(of: folder) {
+                if let index = self.filteredFolder.firstIndex(of: folder) {
                         let indexPath = IndexPath(row: index, section: 0)
                         self.folderTableView.insertRows(at: [indexPath], with: .automatic)
                         
@@ -98,7 +103,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
         switch segue.identifier {
         case "showFolderContent"?:
             if let row = folderTableView.indexPathForSelectedRow?.row {
-                let folder = self.folderStore.allFolder[row]
+                let folder = self.filteredFolder[row]
                 let notesMainViewController = segue.destination as! NotesMainViewController
                 // Create a FolderDetailViewModel instance and set it to local variable called viewModel
                 let viewModel =  FolderDetailViewModel(folder: folder)
@@ -116,27 +121,24 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
 extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folderStore.allFolder.count
+        return filteredFolder.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath) as! FolderCell
-        let folder = folderStore.allFolder[indexPath.row]
+        let folder = filteredFolder[indexPath.row]
     
         cell.folderTitleLabel.text = folder.folderTitle
         
         return cell
     }
     
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-        
+            
             let folder = folderStore.allFolder[indexPath.row]
+            let folders = filteredFolder[indexPath.row]
             let title = "Delete \(folder.folderTitle ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -148,7 +150,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
                 self.folderStore.deleteFolder(folder)
-                self.deleteFolder(folder)
+                self.deleteFolder(folders)
                 self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
                 
             })
@@ -161,14 +163,14 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
 
     public func deleteFolder(_ folder: Folder) {
         
-        if let index = folderStore.allFolder.firstIndex(of: folder) {
-            folderStore.allFolder.remove(at: index)
+        if let index = filteredFolder.firstIndex(of: folder) {
+            filteredFolder.remove(at: index)
         }
         
     }
     
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         folderStore.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         tableView.reloadData()
     }
@@ -178,26 +180,31 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let originalFolder = folderStore.allFolder[fromIndex]
+        let originalFolder = filteredFolder[fromIndex]
 
-        folderStore.allFolder.remove(at: fromIndex)
-        folderStore.allFolder.insert(originalFolder, at: toIndex)
+        filteredFolder.remove(at: fromIndex)
+        filteredFolder.insert(originalFolder, at: toIndex)
         
         folderTableView.reloadData()
     }
     
-//    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        // When there is no text, filteredData is the same as the original data
-//        // When user has entered text into the search box
-//        // Use the filter method to iterate over all items in the data array
-//        // For each item, return true if the item should be included and false if the
-//        // item should NOT be included
-//        filteredNote = searchText.isEmpty ? noteStore.allNote : noteStore.allNote.filter { (note: Note) -> Bool in
-//            // If dataItem matches the searchText, return true to include it
-//            return note.noteTitle?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || note.userInput?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-//        }
-//
-//        noteTableView.reloadData()
-//    }
-    }
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        
+        if searchText.isEmpty {
+            filteredFolder = folderStore.allFolder
+        } else {
+            filteredFolder = searchText.isEmpty ? filteredFolder : filteredFolder.filter { (folder: Folder) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return folder.folderTitle.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                    }
+            }
+             folderTableView.reloadData()
+        }
+    
+}
 
