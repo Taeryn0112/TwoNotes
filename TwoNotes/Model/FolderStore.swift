@@ -28,6 +28,12 @@ public class FolderStore {
         }
     }
 
+    func updateFolderTitle(_ folder: Folder, folderName: String) {
+        try! realm.write {
+        // Update folder name
+        folder.folderTitle = folderName
+      }
+    }
     
     func deleteFolder(_ folder: Folder) {
         try! self.realm.write {
