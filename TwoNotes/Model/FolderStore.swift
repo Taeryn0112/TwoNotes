@@ -21,7 +21,6 @@ public class FolderStore {
         self.allFolder = folders
     }
     
-    
     private func saveFolder(_ folder: Folder) {
         try! realm.write {
             realm.add(folder)

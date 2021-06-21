@@ -21,6 +21,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     var folderStore = FolderStore()
     var folders: Results<Folder>!
     var filteredFolder = [Folder]()
+    var sections = ["Favorites", "Gmail"]
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.rightBarButtonItem = rightButton
         rightButton.tintColor = UIColor.black
+        
+//        folderTableView.sectionHeaderHeight = 70
         
     }
     
@@ -121,6 +124,30 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
 
 extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = self.sections[section]
+        return section
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerLabel = UILabel()
+        headerLabel.frame = CGRect(x: 20, y: 8, width: 320, height: 20)
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        
+        headerLabel.text = self.tableView(folderTableView, titleForHeaderInSection: section)
+        
+        let headerView = UIView()
+        headerView.addSubview(headerLabel)
+        
+        return headerView
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredFolder.count
     }
@@ -167,66 +194,18 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
-            print("Just swiped added", action)
+        
+        let favorite = UIContextualAction(style: .normal, title: "Favorite") { (action, view, completion) in
+            print("Just swipe added", action)
             
-                let title = "Edit Folder"
-                let message = "Re-name the folder"
-                let addFolder = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                let addFolderAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-                
-                addFolder.addAction(addFolderAction)
-                addFolder.addTextField(configurationHandler: { textField in
-                    textField.placeholder = "Input your folder name here..."
-                })
-                
-                addFolder.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
-                    if let folderName = addFolder.textFields?.first?.text {
-                        print("Your folder name: \(folderName)")
-                        // When user re-enters new title then presses Add, grab the existing title and change the title of the folder to the new title.
-                        let selectedFolder = self.folderStore.allFolder[indexPath.row]
-                        //  Update the folderTitle
-                        self.folderStore.updateFolderTitle(selectedFolder, folderName: folderName)
-                        print("Selected folder title: \(selectedFolder.folderTitle)")
-                        self.folderTableView.reloadData()
-                    }
-                }))
-                
-                
-    //            addFolder.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
-    //                if let folderName = addFolder.textFields?.first?.text {
-    //                    print("Your folder name: \(folderName)")
-    //                    // Create new folder and set name property
-    //                    let folder = Folder()
-    //                    folder.folderTitle = folderName
-    //
-    //                    // Add to folder array
-    //                    self.folderStore.storeFolder(folder)
-    //                    self.filteredFolder = self.folderStore.allFolder
-    //
-    //                    if let index = self.filteredFolder.firstIndex(of: folder) {
-    //                            let indexPath = IndexPath(row: index, section: 0)
-    //                            self.folderTableView.insertRows(at: [indexPath], with: .automatic)
-    //
-    //                        }
-    //                    print("serial number: \(folder.serialNumber)")
-    //
-    //                    }
-    //
-    //                }))
-    //            }
-                
-                self.folderTableView.reloadData()
-                self.navigationController?.popViewController(animated: true)
-                self.present(addFolder, animated: true, completion: nil)
-                completion(false)
             
         }
+        
+        favorite.image = UIImage(systemName: "heart.fill")
+        favorite.backgroundColor = UIColor.systemGray5
+        
 
-        edit.image = UIImage(systemName: "square.and.pencil")
-        edit.backgroundColor = .systemOrange
-    
-        let config = UISwipeActionsConfiguration(actions: [edit])
+        let config = UISwipeActionsConfiguration(actions: [favorite])
         config.performsFirstActionWithFullSwipe = false
         return config
         
@@ -259,10 +238,46 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             self.present(ac, animated: true, completion: nil)
             completion(false)
         }
+        
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            print("Just swiped added", action)
+            
+                let title = "Edit Folder"
+                let message = "Re-name the folder"
+                let addFolder = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let addFolderAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                
+                addFolder.addAction(addFolderAction)
+                addFolder.addTextField(configurationHandler: { textField in
+                    textField.placeholder = "Input your folder name here..."
+                })
+                
+                addFolder.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
+                    if let folderName = addFolder.textFields?.first?.text {
+                        print("Your folder name: \(folderName)")
+                        // When user re-enters new title then presses Add, grab the existing title and change the title of the folder to the new title.
+                        let selectedFolder = self.folderStore.allFolder[indexPath.row]
+                        //  Update the folderTitle
+                        self.folderStore.updateFolderTitle(selectedFolder, folderName: folderName)
+                        print("Selected folder title: \(selectedFolder.folderTitle)")
+                        self.folderTableView.reloadData()
+                    }
+                }))
+                
+                self.folderTableView.reloadData()
+                self.navigationController?.popViewController(animated: true)
+                self.present(addFolder, animated: true, completion: nil)
+                completion(false)
+            
+        }
+
+        edit.image = UIImage(systemName: "square.and.pencil")
+        edit.backgroundColor = .systemOrange
+        
         delete.image = UIImage(systemName: "trash")
         delete.backgroundColor = .systemRed
         
-        let config = UISwipeActionsConfiguration(actions: [delete])
+        let config = UISwipeActionsConfiguration(actions: [delete,edit])
         config.performsFirstActionWithFullSwipe = false
         return config
     }
@@ -315,3 +330,12 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension UIImage {
+        func colored(in color: UIColor) -> UIImage {
+            let renderer = UIGraphicsImageRenderer(size: size)
+            return renderer.image { context in
+                color.set()
+                self.withRenderingMode(.alwaysTemplate).draw(in: CGRect(origin: .zero, size: size))
+            }
+        }
+    }
