@@ -8,8 +8,9 @@
 import UIKit
 import Foundation
 import RealmSwift
+import Kingfisher
 
-class FolderViewController: UIViewController, UISearchBarDelegate {
+class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     var notesMainViewController: NotesMainViewController!
     @IBOutlet weak var folderSearchBar: UISearchBar!
@@ -21,7 +22,15 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
     var folderStore = FolderStore()
     var folders: Results<Folder>!
     var filteredFolder = [Folder]()
-    var sections = ["Favorites", "Gmail"]
+    var sections = ["Gmail"]
+    let doubleTapRecognizer = UITapGestureRecognizer(target: self,
+        action: #selector(doubleTap(_:)))
+    var isFavorited: Bool = true
+    var folder: Folder!
+    var heart = "heart.png"
+    var favoritedHeart = "heartFilled.png"
+    
+    @IBOutlet weak var kfImageView: UIImageView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +38,58 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
         folderTableView.dataSource = self
         folderSearchBar.delegate = self
         
+        
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.rightBarButtonItem = rightButton
         rightButton.tintColor = UIColor.black
+       
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.delaysTouchesBegan = true
         
-//        folderTableView.sectionHeaderHeight = 70
-        
+    }
+    
+    func saveImage(imageName: String, image: UIImage) {
+
+     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+
+        let fileName = imageName
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        guard let data = image.jpegData(compressionQuality: 1) else { return }
+
+        //Checks if file exists, removes it if so.
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                try FileManager.default.removeItem(atPath: fileURL.path)
+                print("Removed old image")
+            } catch let removeError {
+                print("couldn't remove file at path", removeError)
+            }
+
+        }
+
+        do {
+            try data.write(to: fileURL)
+        } catch let error {
+            print("error saving file with error", error)
+        }
+
+    }
+
+    func loadImageFromDiskWith(fileName: String) -> UIImage? {
+
+      let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+
+        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+
+        if let dirPath = paths.first {
+            let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+            let image = UIImage(contentsOfFile: imageUrl.path)
+            return image
+
+        }
+
+        return nil
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -124,9 +179,10 @@ class FolderViewController: UIViewController, UISearchBarDelegate {
 
 extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
+    //MARK: Folder Section
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return 1
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -148,6 +204,8 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     
+    //MARK: TableView Required Methods
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredFolder.count
     }
@@ -158,8 +216,15 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
         cell.folderTitleLabel.text = folder.folderTitle
         
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self,
+            action: #selector(self.doubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.delaysTouchesBegan = true
+        cell.addGestureRecognizer(doubleTapRecognizer)
         return cell
     }
+    
+    //MARK: Edit Folder
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -193,25 +258,29 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
+    //MARK: Folder Cell Swipe Action Configuration
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let favorite = UIContextualAction(style: .normal, title: "Favorite") { (action, view, completion) in
             print("Just swipe added", action)
-            
-            
+            //When user taps the favorite button once, create Favorite section.  Then copy and move the favorited row under the Favorite section
         }
-        
-        favorite.image = UIImage(systemName: "heart.fill")
+       
         favorite.backgroundColor = UIColor.systemGray5
         
-
+        // Read the state of the isFavorite property of the selected folder and
+        // change the image of favorite accordingly.
+        let selectedFolder = folderStore.allFolder[indexPath.row]
+        if selectedFolder.isFavorited == false {
+            favorite.image = UIImage(named: "heart.png")
+        } else
+        if selectedFolder.isFavorited == true {
+            favorite.image = UIImage(named: "heartFilled.png")
+        }
+        
         let config = UISwipeActionsConfiguration(actions: [favorite])
         config.performsFirstActionWithFullSwipe = false
         return config
-        
     }
-    
-    
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete") {(action, view, completion) in
@@ -281,16 +350,16 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         config.performsFirstActionWithFullSwipe = false
         return config
     }
-    
+    //MARK: Delete Folder
     
     public func deleteFolder(_ folder: Folder) {
         
         if let index = filteredFolder.firstIndex(of: folder) {
             filteredFolder.remove(at: index)
         }
-        
     }
     
+    //MARK: Move Folder
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         folderStore.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
@@ -310,6 +379,8 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         folderTableView.reloadData()
     }
     
+    //MARK: Search Folder
+    
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data
         // When user has entered text into the search box
@@ -328,6 +399,28 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
              folderTableView.reloadData()
         }
     
+    //MARK: Folder Gesture Related
+
+    func changeFavoriteToRed(_ favoriteIcon: UIContextualAction) {
+        favoriteIcon.image = UIImage(systemName: "heart.fill")?.colored(in: .red)
+    }
+    
+    @objc func doubleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        print("Recognized a double tap")
+        // Get the indexPath of the folder when user double taps on the folder
+        guard let indexPath = folderTableView.indexPathForRow(at: gestureRecognizer.location(in: folderTableView)) else {
+                print("Error: indexPath")
+                return
+            }
+
+        let selectedFolder = folderStore.allFolder[indexPath.row]
+        if selectedFolder.isFavorited == false  {
+            folderStore.toggleFavoriteState(selectedFolder)
+        }
+         else if selectedFolder.isFavorited == true {
+            folderStore.toggleFavoriteState(selectedFolder)
+        }
+    }
 }
 
 extension UIImage {
@@ -339,3 +432,5 @@ extension UIImage {
             }
         }
     }
+
+

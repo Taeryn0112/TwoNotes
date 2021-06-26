@@ -10,4 +10,5 @@ target 'TwoNotes' do
   pod 'RealmSwift'
   pod 'RoundedViews',:git=> 'https://github.com/Taeryn0112/RoundedViews'
   
+
 end

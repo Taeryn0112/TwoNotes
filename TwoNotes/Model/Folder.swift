@@ -15,16 +15,11 @@ class Folder: Object {
     @objc dynamic var serialNumber = ObjectId.generate()
     @objc dynamic var orderingValue: Int = 0
     let notes = List<Note>()
-    
-//    override init() {
-//        self.folderTitle = ""
-////        self.notes = []
-//    }
+    @objc dynamic var isFavorited: Bool = false
     
     convenience init(folderName folderTitle: String) {
         self.init()
         self.folderTitle = folderTitle
-//        self.notes = []
     }
     
     public override static func primaryKey() -> String? {

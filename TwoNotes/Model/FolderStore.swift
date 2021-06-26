@@ -78,5 +78,17 @@ public class FolderStore {
         }
     }
     
+    func toggleFavoriteState(_ favorite: Folder) {
+            try! self.realm.write {
+                if favorite.isFavorited == false {
+                favorite.isFavorited = true
+                    }
+                else if favorite.isFavorited == true {
+                    favorite.isFavorited = false
+                }
+            }
+        
+    }
+
     
 }
