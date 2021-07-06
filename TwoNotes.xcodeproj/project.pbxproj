@@ -33,6 +33,7 @@
 		E99030142578664900EB09AC /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030132578664900EB09AC /* Note.swift */; };
 		E99030192578774C00EB09AC /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99030182578774C00EB09AC /* NoteDetailViewController.swift */; };
 		E9B2C5F32672DCC70057BB86 /* FolderDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B2C5F22672DCC70057BB86 /* FolderDetailViewModel.swift */; };
+		E9F53E58268D3151005A4DF0 /* SectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F53E57268D3151005A4DF0 /* SectionItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		E99030132578664900EB09AC /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E99030182578774C00EB09AC /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		E9B2C5F22672DCC70057BB86 /* FolderDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewModel.swift; sourceTree = "<group>"; };
+		E9F53E57268D3151005A4DF0 /* SectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItem.swift; sourceTree = "<group>"; };
 		FD9D12EF5C63399D1981D072 /* Pods_TwoNotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwoNotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				E99030132578664900EB09AC /* Note.swift */,
 				E978C83D26757FBF0072C6EC /* FolderStore.swift */,
 				E95129122579A22D00E6552C /* NoteStore.swift */,
+				E9F53E57268D3151005A4DF0 /* SectionItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				E978C83E26757FBF0072C6EC /* FolderStore.swift in Sources */,
 				E967402625AC1303005A2D59 /* WeakStyleObserver.swift in Sources */,
 				E95129132579A22D00E6552C /* NoteStore.swift in Sources */,
+				E9F53E58268D3151005A4DF0 /* SectionItem.swift in Sources */,
 				E9903009257860A500EB09AC /* NotesMainViewController.swift in Sources */,
 				E954B5DC257C749200221416 /* NoteCell.swift in Sources */,
 				E93B759A2666AE1E00458B99 /* FolderViewController.swift in Sources */,

@@ -25,6 +25,8 @@ class Folder: Object {
     public override static func primaryKey() -> String? {
         return "serialNumber"
     }
+    
+    
 }
 
 extension Folder {

@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 import RealmSwift
-import Kingfisher
+
 
 class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
@@ -18,19 +18,17 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
 
     var viewModel: FolderDetailViewModel!
     var realm = SceneDelegate.realm
-    //    let folder = Folder()
     var folderStore = FolderStore()
+    var sectionItem = SectionItem()
     var folders: Results<Folder>!
     var filteredFolder = [Folder]()
-    var sections = ["Gmail"]
+    var sections = ["Favorite","Gmail"]
     let doubleTapRecognizer = UITapGestureRecognizer(target: self,
         action: #selector(doubleTap(_:)))
     var isFavorited: Bool = true
     var folder: Folder!
     var heart = "heart.png"
     var favoritedHeart = "heartFilled.png"
-    
-    @IBOutlet weak var kfImageView: UIImageView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,55 +44,57 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.delaysTouchesBegan = true
         
+        
+        
     }
     
-    func saveImage(imageName: String, image: UIImage) {
-
-     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-
-        let fileName = imageName
-        let fileURL = documentsDirectory.appendingPathComponent(fileName)
-        guard let data = image.jpegData(compressionQuality: 1) else { return }
-
-        //Checks if file exists, removes it if so.
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                try FileManager.default.removeItem(atPath: fileURL.path)
-                print("Removed old image")
-            } catch let removeError {
-                print("couldn't remove file at path", removeError)
-            }
-
-        }
-
-        do {
-            try data.write(to: fileURL)
-        } catch let error {
-            print("error saving file with error", error)
-        }
-
-    }
-
-    func loadImageFromDiskWith(fileName: String) -> UIImage? {
-
-      let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-
-        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
-
-        if let dirPath = paths.first {
-            let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
-            let image = UIImage(contentsOfFile: imageUrl.path)
-            return image
-
-        }
-
-        return nil
-    }
+//    func saveImage(imageName: String, image: UIImage) {
+//
+//     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+//
+//        let fileName = imageName
+//        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+//        guard let data = image.jpegData(compressionQuality: 1) else { return }
+//
+//        //Checks if file exists, removes it if so.
+//        if FileManager.default.fileExists(atPath: fileURL.path) {
+//            do {
+//                try FileManager.default.removeItem(atPath: fileURL.path)
+//                print("Removed old image")
+//            } catch let removeError {
+//                print("couldn't remove file at path", removeError)
+//            }
+//
+//        }
+//
+//        do {
+//            try data.write(to: fileURL)
+//        } catch let error {
+//            print("error saving file with error", error)
+//        }
+//
+//    }
+//
+//    func loadImageFromDiskWith(fileName: String) -> UIImage? {
+//
+//      let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+//
+//        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+//        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+//
+//        if let dirPath = paths.first {
+//            let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+//            let image = UIImage(contentsOfFile: imageUrl.path)
+//            return image
+//
+//        }
+//
+//        return nil
+//    }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        filteredFolder = folderStore.allFolder
+//        filteredFolder = folderStore.allFolder
         folderTableView.reloadData()
     }
     
@@ -134,22 +134,22 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
                 // Create new folder and set name property
                 let folder = Folder()
                 folder.folderTitle = folderName
-            
+                
                 // Add to folder array
                 self.folderStore.storeFolder(folder)
-                self.filteredFolder = self.folderStore.allFolder
-                
+                self.filteredFolder = self.folderStore.sectionItems[1].folders
+                self.folderStore.fetchFavoriteAndUnfavorite()
+                self.folderTableView.reloadData()
                 if let index = self.filteredFolder.firstIndex(of: folder) {
-                        let indexPath = IndexPath(row: index, section: 0)
+                        let indexPath = IndexPath(row: index, section: 1)
                         self.folderTableView.insertRows(at: [indexPath], with: .automatic)
                         
                     }
                 print("serial number: \(folder.serialNumber)")
-               
+                
                 }
-            
             }))
-
+        
         self.folderTableView.reloadData()
         self.navigationController?.popViewController(animated: true)
         present(addFolder, animated: true, completion: nil)
@@ -162,13 +162,27 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
         switch segue.identifier {
         case "showFolderContent"?:
             if let row = folderTableView.indexPathForSelectedRow?.row {
-                let folder = self.filteredFolder[row]
-                let notesMainViewController = segue.destination as! NotesMainViewController
-                // Create a FolderDetailViewModel instance and set it to local variable called viewModel
-                let viewModel =  FolderDetailViewModel(folder: folder)
-                notesMainViewController.viewModel = viewModel
+                // If a folder is selected in Favorites section folder = self.folderStore.favoriteFolder[row]
+                // If selected row is in section 0 then folder = self.folderStore.sectionItems[0].folders[row]
                 
-                print("serial number: \(folder.serialNumber)")
+                switch folderTableView.indexPathForSelectedRow?.section {
+                
+                    case 0:
+                        let favoriteFolder = self.folderStore.sectionItems[0].folders[row]
+                        
+                        let notesMainViewController = segue.destination as! NotesMainViewController
+                        // Create a FolderDetailViewModel instance and set it to local variable called viewModel
+                        let viewModel =  FolderDetailViewModel(folder: favoriteFolder)
+                        notesMainViewController.viewModel = viewModel
+                    case 1:
+                        let defaultFolder = self.folderStore.sectionItems[1].folders[row]
+                        let notesMainViewController = segue.destination as! NotesMainViewController
+                        // Create a FolderDetailViewModel instance and set it to local variable called viewModel
+                        let viewModel =  FolderDetailViewModel(folder: defaultFolder)
+                        notesMainViewController.viewModel = viewModel
+                        
+                    default: print("")
+                }
             }
 
         default:
@@ -182,13 +196,16 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     //MARK: Folder Section
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        
+        return folderStore.sectionItems.count
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = self.sections[section]
-        return section
+        let sectionItem = self.folderStore.sectionItems[section]
+        return sectionItem.name
     }
+    
+    // MARK: Section Header View
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -207,23 +224,33 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     //MARK: TableView Required Methods
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredFolder.count
+//        let sectionItem = example[section]
+//        return sectionItem.folders.count
+        let sectionItem = folderStore.sectionItems[section]
+        return sectionItem.folders.count
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let sectionItem = example[indexPath.section]
+//        let folder = sectionItem.folders[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath) as! FolderCell
-        let folder = filteredFolder[indexPath.row]
-    
+        let sectionItem = folderStore.sectionItems[indexPath.section]
+        let folder = sectionItem.folders[indexPath.row]
+        
         cell.folderTitleLabel.text = folder.folderTitle
+        
         
         let doubleTapRecognizer = UITapGestureRecognizer(target: self,
             action: #selector(self.doubleTap(_:)))
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.delaysTouchesBegan = true
         cell.addGestureRecognizer(doubleTapRecognizer)
+        
+        
         return cell
     }
-    
+        
     //MARK: Edit Folder
     
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -269,14 +296,24 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         
         // Read the state of the isFavorite property of the selected folder and
         // change the image of favorite accordingly.
+        if indexPath.section == 1 {
         let selectedFolder = folderStore.allFolder[indexPath.row]
         if selectedFolder.isFavorited == false {
             favorite.image = UIImage(named: "heart.png")
         } else
         if selectedFolder.isFavorited == true {
             favorite.image = UIImage(named: "heartFilled.png")
+            }
         }
-        
+        if indexPath.section == 0 {
+        let selectedFolderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
+        if selectedFolderInFavorites.isFavorited == false {
+            favorite.image = UIImage(named: "heart.png")
+        } else
+        if selectedFolderInFavorites.isFavorited == true {
+            favorite.image = UIImage(named: "heartFilled.png")
+            }
+        }
         let config = UISwipeActionsConfiguration(actions: [favorite])
         config.performsFirstActionWithFullSwipe = false
         return config
@@ -359,6 +396,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    
     //MARK: Move Folder
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
@@ -387,7 +425,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         // Use the filter method to iterate over all items in the data array
         // For each item, return true if the item should be included and false if the
         // item should NOT be included
-        
+
         if searchText.isEmpty {
             filteredFolder = folderStore.allFolder
         } else {
@@ -412,14 +450,45 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
                 print("Error: indexPath")
                 return
             }
-
-        let selectedFolder = folderStore.allFolder[indexPath.row]
-        if selectedFolder.isFavorited == false  {
-            folderStore.toggleFavoriteState(selectedFolder)
+        
+        let addToFavorite = folderStore.sectionItems
+        let selectedFolderInDefaults = addToFavorite[1].folders[indexPath.row]
+        
+        if indexPath.section == 1 {
+        // Default Section
+        if selectedFolderInDefaults.isFavorited == false {
+            folderStore.toggleFavoriteState(selectedFolderInDefaults)
+            folderStore.fetchFavoriteAndUnfavorite()
+            folderTableView.reloadData()
         }
-         else if selectedFolder.isFavorited == true {
-            folderStore.toggleFavoriteState(selectedFolder)
+         else if selectedFolderInDefaults.isFavorited == true {
+            folderStore.toggleFavoriteState(selectedFolderInDefaults)
+            folderStore.fetchFavoriteAndUnfavorite()
+            folderTableView.reloadData()
+            }
         }
+        
+        // Favorite Section
+        if indexPath.section == 0 {
+        
+            let selectedFolderInFavorites = addToFavorite[0].folders[indexPath.row]
+            
+            if selectedFolderInFavorites.isFavorited == true {
+                folderStore.toggleFavoriteState(selectedFolderInFavorites)
+                folderStore.fetchFavoriteAndUnfavorite()
+                folderTableView.reloadData()
+        
+                    }
+            }
+    }
+    
+    func deleteFavoritesFolder(_ folder: Folder) {
+        
+        if let index = self.folderStore.sectionItems[0].folders.firstIndex(of: folder) {
+            self.folderStore.sectionItems[0].folders.remove(at: index)
+        }
+        // update ordering value
+        self.folderStore.updateFavoriteFolderOrderingValue()
     }
 }
 
