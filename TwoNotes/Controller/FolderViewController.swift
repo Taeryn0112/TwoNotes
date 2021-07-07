@@ -94,7 +94,7 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        filteredFolder = folderStore.allFolder
+        filteredFolder = self.folderStore.sectionItems[1].folders
         folderTableView.reloadData()
     }
     
@@ -258,7 +258,8 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             
             let folder = folderStore.allFolder[indexPath.row]
-            let folders = filteredFolder[indexPath.row]
+            let folderInDefault = folderStore.sectionItems[1].folders[indexPath.row]
+            let folderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
             let title = "Delete \(folder.folderTitle ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -269,9 +270,20 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-                self.folderStore.deleteFolder(folder)
-                self.deleteFolder(folders)
-                self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
+                if indexPath.section == 0 {
+                    self.folderStore.deleteFolder(folder)
+                    self.deleteFolderInFavorites(folderInFavorites)
+                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.folderStore.fetchFavoriteAndUnfavorite()
+                    self.folderTableView.reloadData()
+                }
+                else if indexPath.section == 1 {
+                    self.folderStore.deleteFolder(folder)
+                    self.deleteFolderInDefault(folderInDefault)
+                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.folderStore.fetchFavoriteAndUnfavorite()
+                    self.folderTableView.reloadData()
+                }
                 
             })
             ac.addAction(deleteAction)
@@ -279,6 +291,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             present(ac, animated: true, completion: nil)
         }
         
+
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -323,7 +336,9 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         let delete = UIContextualAction(style: .normal, title: "Delete") {(action, view, completion) in
             print("Just swiped added", action)
             let folder = self.folderStore.allFolder[indexPath.row]
-            let folders = self.filteredFolder[indexPath.row]
+            let folderInDefault = self.folderStore.sectionItems[1].folders[indexPath.row]
+            let folderInFavorites = self.folderStore.sectionItems[0].folders[indexPath.row]
+            
             let title = "Delete \(folder.folderTitle ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -333,16 +348,27 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             ac.addAction(cancelAction)
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
-                
-                self.folderStore.deleteFolder(folder)
-                self.deleteFolder(folders)
-                self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
-                
+                               
+                if indexPath.section == 0 {
+                    self.folderStore.deleteFolder(folder)
+                    self.deleteFolderInFavorites(folderInFavorites)
+                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.folderStore.fetchFavoriteAndUnfavorite()
+                    self.folderTableView.reloadData()
+                }
+                else if indexPath.section == 1 {
+                    self.folderStore.deleteFolder(folder)
+                    self.deleteFolderInDefault(folderInDefault)
+                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.folderStore.fetchFavoriteAndUnfavorite()
+                    self.folderTableView.reloadData()
+                }
             })
             ac.addAction(deleteAction)
             
             self.present(ac, animated: true, completion: nil)
             completion(false)
+           
         }
         
         let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
@@ -389,10 +415,17 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     }
     //MARK: Delete Folder
     
-    public func deleteFolder(_ folder: Folder) {
+    public func deleteFolderInDefault(_ folder: Folder) {
         
-        if let index = filteredFolder.firstIndex(of: folder) {
-            filteredFolder.remove(at: index)
+        if let index = folderStore.sectionItems[1].folders.firstIndex(of: folder) {
+            folderStore.sectionItems[1].folders.remove(at: index)
+        }
+    }
+    
+    public func deleteFolderInFavorites(_ folder: Folder) {
+        
+        if let index = folderStore.sectionItems[0].folders.firstIndex(of: folder) {
+            folderStore.sectionItems[0].folders.remove(at: index)
         }
     }
     

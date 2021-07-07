@@ -33,11 +33,9 @@ public class FolderStore {
         updateFavoriteFolderOrderingValue()
         updateDefaultFolderOrderingValue()
         
-        
         sectionItems = [
             SectionItem(name: "Favorites", folders: favoritesFolder),
             SectionItem(name: "Gmail", folders: defaultFolder) ]
-        
         
     }
     
@@ -57,9 +55,8 @@ public class FolderStore {
             SectionItem(name: "Favorites", folders: favoritesFolder),
             SectionItem(name: "Gmail", folders: defaultFolder) ]
         
-        
     }
-
+    
     private func saveFolder(_ folder: Folder) {
         try! realm.write {
             realm.add(folder)
