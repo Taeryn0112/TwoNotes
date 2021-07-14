@@ -10,14 +10,13 @@ import Foundation
 import RealmSwift
 
 
-class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
+class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate, UITabBarControllerDelegate {
     
-    var notesMainViewController: NotesMainViewController!
+    
     @IBOutlet weak var folderSearchBar: UISearchBar!
     @IBOutlet weak var folderTableView: UITableView!
 
     var viewModel: FolderDetailViewModel!
-    var realm = SceneDelegate.realm
     var folderStore = FolderStore()
     var sectionItem = SectionItem()
     var folders: Results<Folder>!
@@ -29,7 +28,13 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
     var folder: Folder!
     var heart = "heart.png"
     var favoritedHeart = "heartFilled.png"
-    
+    @IBOutlet weak var deleteAllFoldersButton: UIButton!
+    @IBOutlet weak var addNewFolderButton: UIButton!
+    var tempDeleteFolderArray = [Folder]()
+    var tempDefaultFolder = [Folder]()
+    var tempFavoriteFolder = [Folder]()
+    var bothSelectedFolder = [Folder]()
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         folderTableView.delegate = self
@@ -40,11 +45,14 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing(sender:)))
         self.navigationItem.rightBarButtonItem = rightButton
         rightButton.tintColor = UIColor.black
+        rightButton.image = UIImage(systemName: "line.horizontal.3.circle")
+        deleteAllFoldersButton.isHidden = true
        
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.delaysTouchesBegan = true
+        folderTableView.allowsMultipleSelectionDuringEditing = true
         
-        
+        self.addNewFolderButton.addTarget(self, action: #selector(addNewFolder), for: .touchUpInside)
         
     }
     
@@ -107,17 +115,65 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
     @objc func showEditing(sender: UIBarButtonItem) {
         if(self.folderTableView.isEditing == true) {
             self.folderTableView.isEditing = false
-            self.navigationItem.rightBarButtonItem?.title = "Edit"
+            self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "line.horizontal.3.circle")
+            self.deleteAllFoldersButton.isHidden = true
+            self.addNewFolderButton.isHidden = false
+           
             
         } else
         {
             self.folderTableView.isEditing = true
+            self.navigationItem.rightBarButtonItem?.image = nil
             self.navigationItem.rightBarButtonItem?.title = "Done"
+            self.addNewFolderButton.isHidden = true
+            self.deleteAllFoldersButton.isHidden = false
+
+        }
+    }
+    
+    @objc func deleteAllFolders(sender: UIButton!) {
+        print("calling delete folder button")
+        
+        if let selectedRows = folderTableView.indexPathsForSelectedRows {
+            
+            // combine the two temp arrays, filter out the row with same serial number
+            // (return the row with same serial number) and have those selected.
+            for indexPath in selectedRows {
+                if indexPath.section == 1 {
+                    let folderInDefault = folderStore.sectionItems[1].folders[indexPath.row]
+                           tempDefaultFolder.append(folderInDefault)
+                }
+            }
+            
+            for indexPath in selectedRows {
+                if indexPath.section == 0 {
+                    let folderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
+                    tempFavoriteFolder.append(folderInFavorites)
+                    
+                }
+            }
+                
+            for folder in tempDefaultFolder {
+             if let index = self.folderStore.sectionItems[1].folders.firstIndex(of: folder) {
+                    self.folderStore.deleteFolder(folder)
+                    self.folderStore.sectionItems[1].folders.remove(at: index)
+                }
+            }
+            for folder in tempFavoriteFolder {
+             if let index = self.folderStore.sectionItems[0].folders.firstIndex(of: folder) {
+                    self.folderStore.deleteFolder(folder)
+                    self.folderStore.sectionItems[0].folders.remove(at: index)
+                }
+            }
+            
+            folderTableView.deleteRows(at: selectedRows, with: .automatic)
+            self.folderStore.fetchFavoriteAndUnfavorite()
+            self.folderTableView.reloadData()
         }
     }
     
     
-    @IBAction func addNewFolder(_ sender: UIButton) {
+    @objc func addNewFolder(sender: UIButton!) {
         let title = "New Folder"
         let message = "Enter the name of the new folder"
         let addFolder = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -154,41 +210,6 @@ class FolderViewController: UIViewController, UISearchBarDelegate, UIGestureReco
         self.navigationController?.popViewController(animated: true)
         present(addFolder, animated: true, completion: nil)
     }
-    
-    
-    //MARK: Segue
-    
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "showFolderContent"?:
-            if let row = folderTableView.indexPathForSelectedRow?.row {
-                // If a folder is selected in Favorites section folder = self.folderStore.favoriteFolder[row]
-                // If selected row is in section 0 then folder = self.folderStore.sectionItems[0].folders[row]
-                
-                switch folderTableView.indexPathForSelectedRow?.section {
-                
-                    case 0:
-                        let favoriteFolder = self.folderStore.sectionItems[0].folders[row]
-                        
-                        let notesMainViewController = segue.destination as! NotesMainViewController
-                        // Create a FolderDetailViewModel instance and set it to local variable called viewModel
-                        let viewModel =  FolderDetailViewModel(folder: favoriteFolder)
-                        notesMainViewController.viewModel = viewModel
-                    case 1:
-                        let defaultFolder = self.folderStore.sectionItems[1].folders[row]
-                        let notesMainViewController = segue.destination as! NotesMainViewController
-                        // Create a FolderDetailViewModel instance and set it to local variable called viewModel
-                        let viewModel =  FolderDetailViewModel(folder: defaultFolder)
-                        notesMainViewController.viewModel = viewModel
-                        
-                    default: print("")
-                }
-            }
-
-        default:
-            preconditionFailure("Unexpected segue identifier")
-        }
-    }
 }
 
 extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
@@ -224,30 +245,28 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     //MARK: TableView Required Methods
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let sectionItem = example[section]
-//        return sectionItem.folders.count
         let sectionItem = folderStore.sectionItems[section]
         return sectionItem.folders.count
-        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let sectionItem = example[indexPath.section]
-//        let folder = sectionItem.folders[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath) as! FolderCell
         let sectionItem = folderStore.sectionItems[indexPath.section]
         let folder = sectionItem.folders[indexPath.row]
         
         cell.folderTitleLabel.text = folder.folderTitle
         
-        
-        let doubleTapRecognizer = UITapGestureRecognizer(target: self,
-            action: #selector(self.doubleTap(_:)))
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.doubleTap(_:)))
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.delaysTouchesBegan = true
         cell.addGestureRecognizer(doubleTapRecognizer)
         
-        
+//        if tableView.isEditing {
+////            let selectedIndexPaths = tableView.indexPathsForSelectedRows
+////            let isRowSelected = selectedIndexPaths != nil && selectedIndexPaths!.contains(indexPath)
+//            let isRowSelected = bothSelectedFolder.contains(folder)
+//            cell.accessoryType = isRowSelected ? .checkmark : .none
+//        }
         return cell
     }
         
@@ -259,7 +278,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             
             let folder = folderStore.allFolder[indexPath.row]
             let folderInDefault = folderStore.sectionItems[1].folders[indexPath.row]
-            let folderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
+//            let folderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
             let title = "Delete \(folder.folderTitle ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -270,32 +289,68 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                 
-                if indexPath.section == 0 {
-                    self.folderStore.deleteFolder(folder)
-                    self.deleteFolderInFavorites(folderInFavorites)
-                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
-                    self.folderStore.fetchFavoriteAndUnfavorite()
-                    self.folderTableView.reloadData()
-                }
-                else if indexPath.section == 1 {
+                if indexPath.section == 1 {
                     self.folderStore.deleteFolder(folder)
                     self.deleteFolderInDefault(folderInDefault)
                     self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
                     self.folderStore.fetchFavoriteAndUnfavorite()
                     self.folderTableView.reloadData()
                 }
-                
             })
             ac.addAction(deleteAction)
             
             present(ac, animated: true, completion: nil)
         }
-        
-
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if indexPath.section == 1 {
+            return true
+        }
+        return false
+    }
+   
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView.isEditing == true {
+            let cell = tableView.cellForRow(at: indexPath)
+            if indexPath.section == 0 {
+                cell?.selectionStyle = UITableViewCell.SelectionStyle.none
+            }
+            else {
+                self.deleteAllFoldersButton.addTarget(self, action: #selector(deleteAllFolders), for: .touchUpInside)
+            }
+        }
+        else if tableView.isEditing == false {
+        switch indexPath.section {
+        
+            case 0:
+                let storyBoard = UIStoryboard(name:"Main" , bundle: nil)
+                let notesMainViewController = storyBoard.instantiateViewController(identifier: "NotesMainVC") as! NotesMainViewController
+                let favoriteFolder = self.folderStore.sectionItems[0].folders[indexPath.row]
+                // Create a FolderDetailViewModel instance and set it to local variable called viewModel
+                let viewModel =  FolderDetailViewModel(folder: favoriteFolder)
+                notesMainViewController.viewModel = viewModel
+                navigationController?.pushViewController(notesMainViewController, animated: true)
+            case 1:
+                let storyBoard = UIStoryboard(name:"Main" , bundle: nil)
+                let notesMainViewController = storyBoard.instantiateViewController(identifier: "NotesMainVC") as! NotesMainViewController
+                let defaultFolder = self.folderStore.sectionItems[1].folders[indexPath.row]
+                // Create a FolderDetailViewModel instance and set it to local variable called viewModel
+                let viewModel =  FolderDetailViewModel(folder: defaultFolder)
+                notesMainViewController.viewModel = viewModel
+                navigationController?.pushViewController(notesMainViewController, animated: true)
+                
+            default: print("")
+            }
+        }
+        
+    }
+    
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        cell.accessoryType = .none
+        // cell.accessoryView.hidden = true  // if using a custom image
     }
     
     //MARK: Folder Cell Swipe Action Configuration
@@ -310,23 +365,23 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         // Read the state of the isFavorite property of the selected folder and
         // change the image of favorite accordingly.
         if indexPath.section == 1 {
-        let selectedFolder = folderStore.allFolder[indexPath.row]
-        if selectedFolder.isFavorited == false {
-            favorite.image = UIImage(named: "heart.png")
-        } else
-        if selectedFolder.isFavorited == true {
-            favorite.image = UIImage(named: "heartFilled.png")
-            }
-        }
+            let selectedFolder = folderStore.allFolder[indexPath.row]
+            if selectedFolder.isFavorited == false {
+                favorite.image = UIImage(named: "heart.png")
+                    } else
+            if selectedFolder.isFavorited == true {
+                favorite.image = UIImage(named: "heartFilled.png")
+                    }
+                }
         if indexPath.section == 0 {
-        let selectedFolderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
-        if selectedFolderInFavorites.isFavorited == false {
-            favorite.image = UIImage(named: "heart.png")
-        } else
-        if selectedFolderInFavorites.isFavorited == true {
-            favorite.image = UIImage(named: "heartFilled.png")
-            }
-        }
+            let selectedFolderInFavorites = folderStore.sectionItems[0].folders[indexPath.row]
+            if selectedFolderInFavorites.isFavorited == false {
+                favorite.image = UIImage(named: "heart.png")
+                    } else
+            if selectedFolderInFavorites.isFavorited == true {
+                favorite.image = UIImage(named: "heartFilled.png")
+                    }
+                }
         let config = UISwipeActionsConfiguration(actions: [favorite])
         config.performsFirstActionWithFullSwipe = false
         return config
@@ -337,8 +392,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             print("Just swiped added", action)
             let folder = self.folderStore.allFolder[indexPath.row]
             let folderInDefault = self.folderStore.sectionItems[1].folders[indexPath.row]
-            let folderInFavorites = self.folderStore.sectionItems[0].folders[indexPath.row]
-            
+
             let title = "Delete \(folder.folderTitle ?? "")"
             let message = "Are you sure you want to delete this note?"
             
@@ -349,14 +403,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
                                
-                if indexPath.section == 0 {
-                    self.folderStore.deleteFolder(folder)
-                    self.deleteFolderInFavorites(folderInFavorites)
-                    self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
-                    self.folderStore.fetchFavoriteAndUnfavorite()
-                    self.folderTableView.reloadData()
-                }
-                else if indexPath.section == 1 {
+                    if indexPath.section == 1 {
                     self.folderStore.deleteFolder(folder)
                     self.deleteFolderInDefault(folderInDefault)
                     self.folderTableView.deleteRows(at: [indexPath], with: .automatic)
@@ -391,7 +438,6 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
                         let selectedFolder = self.folderStore.allFolder[indexPath.row]
                         //  Update the folderTitle
                         self.folderStore.updateFolderTitle(selectedFolder, folderName: folderName)
-                        print("Selected folder title: \(selectedFolder.folderTitle)")
                         self.folderTableView.reloadData()
                     }
                 }))
@@ -429,11 +475,11 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    
     //MARK: Move Folder
     public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
         folderStore.moveFolder(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        folderStore.fetchFavoriteAndUnfavorite()
         tableView.reloadData()
     }
     
@@ -442,10 +488,10 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let originalFolder = filteredFolder[fromIndex]
+        let originalFolder = folderStore.sectionItems[1].folders[fromIndex]
 
-        filteredFolder.remove(at: fromIndex)
-        filteredFolder.insert(originalFolder, at: toIndex)
+        folderStore.sectionItems[1].folders.remove(at: fromIndex)
+        folderStore.sectionItems[1].folders.insert(originalFolder, at: toIndex)
         
         folderTableView.reloadData()
     }
@@ -478,6 +524,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
     
     @objc func doubleTap(_ gestureRecognizer: UIGestureRecognizer) {
         print("Recognized a double tap")
+        if folderTableView.isEditing == false {
         // Get the indexPath of the folder when user double taps on the folder
         guard let indexPath = folderTableView.indexPathForRow(at: gestureRecognizer.location(in: folderTableView)) else {
                 print("Error: indexPath")
@@ -513,6 +560,7 @@ extension FolderViewController : UITableViewDelegate, UITableViewDataSource {
         
                     }
             }
+        }
     }
     
     func deleteFavoritesFolder(_ folder: Folder) {

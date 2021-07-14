@@ -30,8 +30,7 @@ class Folder: Object {
 }
 
 extension Folder {
-    
     static func == (lhs: Folder, rhs: Folder) -> Bool {
-        return lhs.folderTitle == rhs.folderTitle
+        return lhs.serialNumber == rhs.serialNumber
     }
 }

@@ -21,8 +21,4 @@ class SectionItem {
         self.folders = folders
     }
     
-//    static let example = [
-//        SectionItem(name: "Favorites", folders: <#[Folder]#>),
-//        SectionItem(name: "Gmail", folders: <#[Folder]#>)
-//    ]
 }

@@ -12,4 +12,9 @@ class FolderCell: UITableViewCell {
     @IBOutlet weak var folderTitleLabel: UILabel!
     
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        folderImageView.image = nil
+//        folderTitleLabel.text = nil 
+//    }
 }
